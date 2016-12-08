@@ -1,8 +1,11 @@
-import React from 'react'
+import React from 'react';
+import Header from './Header';
+import Body from './Body';
 
 const App = () => (
     <div className="container">
-        test
+        <Header />
+        <Body/>
     </div>
 );
 
