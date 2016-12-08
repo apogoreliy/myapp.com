@@ -1,5 +1,5 @@
 //var webpack = require('webpack');
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
+//var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
   entry: [
@@ -30,15 +30,8 @@ module.exports = {
         },
         test: /\.jsx?$/,
         exclude: /(node_modules|bower_components)/
-      },
-      {
-          test: /\.css$/,
-          loader: ExtractTextPlugin.extract("style-loader", "css-loader")
       }
     ]
   },
-  plugins: [
-      new ExtractTextPlugin("[name].css")
-  ],
   devtool: 'cheap-module-eval-source-map'
 };
