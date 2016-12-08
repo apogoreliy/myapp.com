@@ -3,18 +3,18 @@ import React, {Component} from 'react';
 export default class CategoryList extends Component{
     render(){
         return(
-            <div className="col-md-2">
-                <div>
-                    <span className="btn btn-default">X</span>
-                    <span>Category 1</span>
+            <div className="col-md-3">
+                <div style={{marginTop: "10px"}}>
+                    <span className="btn btn-default" style={{marginRight: "10px"}}>X</span>
+                    <span>Телефоны</span>
                 </div>
-                <div>
-                    <span className="btn btn-default">X</span>
-                    <span>Category 2</span>
+                <div style={{marginTop: "10px"}}>
+                    <span className="btn btn-default" style={{marginRight: "10px"}}>X</span>
+                    <span>Планшеты</span>
                 </div>
-                <div>
-                    <span className="btn btn-default">X</span>
-                    <span>Category 3</span>
+                <div style={{marginTop: "10px"}}>
+                    <span className="btn btn-default" style={{marginRight: "10px"}}>X</span>
+                    <span>Компьютеры</span>
                 </div>
             </div>
         );
