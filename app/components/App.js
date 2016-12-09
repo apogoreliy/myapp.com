@@ -5,7 +5,7 @@ import ProductModal from '../containers/ProductModal';
 import CategoryModal from '../containers/CategoryModal';
 import DeleteModal from '../containers/DeleteModal';
 
-const App = ()=>(
+export default () => (
     <div className="container">
         <OpenProductModal />
         <Body/>
@@ -14,5 +14,3 @@ const App = ()=>(
         <DeleteModal />
     </div>
 );
-
-export default App;

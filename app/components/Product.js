@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Product = ({edit, remove}) => (
+export default ({edit, remove}) => (
     <tr>
         <td>1</td>
         <td>HTC</td>
@@ -12,5 +12,3 @@ const Product = ({edit, remove}) => (
         </td>
     </tr>
 );
-
-export default Product;

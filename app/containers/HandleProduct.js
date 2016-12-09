@@ -6,8 +6,6 @@ import Product from '../components/Product';
 const mapDispatchToProps = (dispatch) => {
     return {
         edit: (id) => {
-            console.log(id);
-
             dispatch(openEditProductModal(id))
         },
         remove : (id) => {

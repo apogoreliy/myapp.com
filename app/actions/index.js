@@ -26,7 +26,6 @@ export const closeProductModal = () => {
 };
 
 export const openCategoryModal = () => {
-    console.log('act');
     return {
         type: OPEN_ADD_CATEGORY_MODAL,
         openAddCategoryModal : true

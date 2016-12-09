@@ -13,9 +13,7 @@ const mapDispatchToProps = (dispatch) => {
     }
 };
 
-const OpenProductModal = connect(
+export default connect(
     null,
     mapDispatchToProps
 )(Header);
-
-export default OpenProductModal

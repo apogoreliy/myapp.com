@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Category = ({handleConf, selectCategory}) => (
+export default ({handleConf, selectCategory}) => (
     <div style={{marginTop: "10px"}}>
         <span className="btn btn-default" onClick={handleConf} style={{marginRight: "10px"}}>X</span>
         <a onClick={e => { e.preventDefault(); selectCategory(1); }}>
@@ -8,5 +8,3 @@ const Category = ({handleConf, selectCategory}) => (
         </a>
     </div>
 );
-
-export default Category;

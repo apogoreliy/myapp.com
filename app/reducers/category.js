@@ -6,7 +6,7 @@ import {
     SELECT_CATEGORY
 } from '../constants/index';
 
-const category = (state = {}, action) => {
+export default (state = {}, action) => {
     switch (action.type) {
         case CLOSE_CATEGORY_MODAL:
             return Object.assign({}, state, {
@@ -31,5 +31,3 @@ const category = (state = {}, action) => {
     }
     return state;
 };
-
-export default category;

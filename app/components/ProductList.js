@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
+import React from 'react';
 import HandleProduct from '../containers/HandleProduct'
 
-const ProductList = () => (
+export default () => (
     <div className="col-md-9">
         <table className="table">
             <thead>
@@ -19,5 +19,3 @@ const ProductList = () => (
         </table>
     </div>
 );
-
-export default ProductList;
