@@ -36,7 +36,7 @@ const mapStateToProps = (state) => {
     console.log(state);
 
     return {
-        confirm : state.product.openAddProductModal,
+        confirm : state.product.openAddProductModal || state.product.openEditProductModal,
         headerTitle : state.product.openAddProductModal ? "Добавить товар" : "Изменить товар"
     }
 };

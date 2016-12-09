@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-import Category from './Category';
+import HandleCategory from '../containers/HandleCategory';
 
 const CategoryList = () => (
     <div className="col-md-3">
-        <Category />
+        <HandleCategory />
     </div>
 );
 

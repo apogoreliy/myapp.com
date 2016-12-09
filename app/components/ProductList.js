@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Product from './Product'
+import HandleProduct from '../containers/HandleProduct'
 
 const ProductList = () => (
     <div className="col-md-9">
@@ -14,7 +14,7 @@ const ProductList = () => (
                 </tr>
             </thead>
             <tbody>
-                <Product />
+                <HandleProduct />
             </tbody>
         </table>
     </div>
