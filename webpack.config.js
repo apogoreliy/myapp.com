@@ -12,10 +12,6 @@ module.exports = {
       'node_modules',
       './app/components'
     ],
-    alias: {
-      actions: 'app/actions/actions.js',
-      reducers: 'app/reducers/reducers.js'
-    },
     extensions: ['', '.js']
   },
   module: {

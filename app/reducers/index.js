@@ -1,6 +1,10 @@
 import { combineReducers } from 'redux'
+import product from './product';
+import category from './category';
 
-const todoApp = combineReducers({
+const rootReducer = combineReducers({
+    product,
+    category
 });
 
-export default todoApp
+export default rootReducer

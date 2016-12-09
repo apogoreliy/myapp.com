@@ -1,12 +1,18 @@
 import React from 'react';
-import Header from './Header';
+import OpenProductModal from '../containers/openProductModal';
 import Body from './Body';
+import ProductModal from '../containers/ProductModal';
+import CategoryModal from '../containers/CategoryModal';
+import DeleteModal from '../containers/DeleteModal';
 
-const App = () => (
+const App = ()=>(
     <div className="container">
-        <Header />
+        <OpenProductModal />
         <Body/>
+        <ProductModal />
+        <CategoryModal />
+        <DeleteModal />
     </div>
 );
 
-export default App
+export default App;
