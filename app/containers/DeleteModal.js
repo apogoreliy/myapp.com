@@ -2,13 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux'
 import { closeDeleteModal } from '../actions'
 
-const DeleteModal = ({confirm, handleConf, headerTitle, bodyText}) => (
+const DeleteModal = ({confirm, close, headerTitle, bodyText}) => (
     <div>
         <div style={{display: confirm ? "block" : "none"}} className="modal in" role="dialog"
              aria-labelledby="modal-label">
             <div className="modal-dialog" role="document">
                 <div className="modal-content">
-                    <button type="button" onClick={handleConf} className="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" onClick={close} className="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                     <h4 className="modal-title" style={{textAlign: "center"}}>{headerTitle}</h4>
@@ -17,7 +17,7 @@ const DeleteModal = ({confirm, handleConf, headerTitle, bodyText}) => (
                     </div>
                 </div>
                 <div className="modal-footer">
-                    <button type="button" className="btn btn-primary" onClick={handleConf}>
+                    <button type="button" className="btn btn-primary" onClick={close}>
                         Сохранить
                     </button>
                 </div>
@@ -37,7 +37,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        handleConf: () => {
+        close: () => {
             dispatch(closeDeleteModal())
         }
     }

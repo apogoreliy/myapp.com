@@ -1,31 +1,38 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { closeCategoryModal } from '../actions'
+import { closeCategoryModal, addCategory } from '../actions'
 
-const CategoryModal =(props) => (
-    <div>
-        <div style={{display: props.confirm ? "block" : "none"}} className="modal in" role="dialog"
-             aria-labelledby="modal-label">
-            <div className="modal-dialog" role="document">
-                <div className="modal-content">
-                    <button type="button" onClick={props.handleConf} className="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                    <h4 className="modal-title">{props.headerTitle}</h4>
-                    <div className="modal-body">
-                        <input type="text" className="form-control" placeholder="Название" style={{marginTop: "15px"}}/>
+const CategoryModal =({confirm, close, headerTitle, handleClick}) => {
+    let name;
+    return(
+        <div>
+            <div style={{display: confirm ? "block" : "none"}} className="modal in" role="dialog"
+                 aria-labelledby="modal-label">
+                <div className="modal-dialog" role="document">
+                    <div className="modal-content">
+                        <button type="button" onClick={close} className="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                        <h4 className="modal-title">{headerTitle}</h4>
+                        <div className="modal-body">
+                            <input type="text" ref={node=>{name=node}} className="form-control" placeholder="Название" style={{marginTop: "15px"}}/>
+                        </div>
+                    </div>
+                    <div className="modal-footer">
+                        <button type="button" className="btn btn-primary" onClick={
+                            () => {
+                                handleClick(name.value);
+                                name.value='';
+                            }}>
+                            Сохранить
+                        </button>
                     </div>
                 </div>
-                <div className="modal-footer">
-                    <button type="button" className="btn btn-primary" onClick={props.handleConf}>
-                        Сохранить
-                    </button>
-                </div>
             </div>
+            <div style={{display: confirm ? "block" : "none"}} className="modal-backdrop in"></div>
         </div>
-        <div style={{display: props.confirm ? "block" : "none"}} className="modal-backdrop in"></div>
-    </div>
-);
+    );
+}
 
 const mapStateToProps = (state) => {
     return {
@@ -36,8 +43,11 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        handleConf: () => {
+        close: () => {
             dispatch(closeCategoryModal())
+        },
+        handleClick : () => {
+            dispatch(addCategory())
         }
     }
 };

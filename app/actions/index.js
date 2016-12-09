@@ -7,8 +7,11 @@ import {
     CLOSE_DELETE_MODAL,
     SELECT_CATEGORY,
     OPEN_EDIT_PRODUCT_MODAL,
-    OPEN_DELETE_PRODUCT_MODAL
-} from '../constants/index'
+    OPEN_DELETE_PRODUCT_MODAL,
+    ADD_PRODUCT,
+    ADD_CATEGORY
+} from '../constants/index';
+import axios from 'axios';
 
 export const openProductModal = () => {
     return {
@@ -75,6 +78,39 @@ export const openDeleteProductModal = () => {
     }
 };
 
+export const addProduct = (category, name, purchasePrice, price) => {
+    return function(dispatch) {
+        dispatch(closeProductModal());
+
+/*
+        axios.post(`${ROOT_URL}/signin`, { email, password })
+            .then(response => {
+                // If request is good...
+                // - Update state to indicate user is authenticated
+                dispatch({ type: AUTH_USER });
+                // - Save the JWT token
+                localStorage.setItem('token', response.data.token);
+                // - redirect to the route '/feature'
+                browserHistory.push('/feature');
+            })
+            .catch(() => {
+                // If request is bad...
+                // - Show an error to the user
+                dispatch(authError('Bad Login Info'));
+            });
+*/
+        //localStorage.setItem('products', {category:category, name:name, purchasePrice:purchasePrice, price:price});
+
+        dispatch({
+            type: ADD_PRODUCT,
+            category,
+            name,
+            purchasePrice,
+            price
+        });
+    }
+};
+
 export const editProduct = (id) => {
     return {
         type: SELECT_CATEGORY,
@@ -86,5 +122,38 @@ export const removeProduct = (id) => {
     return {
         type: SELECT_CATEGORY,
         removed_product_id : id
+    }
+};
+
+export const addCategory = (name) => {
+    return function(dispatch) {
+        dispatch(closeCategoryModal());
+
+        /*
+         axios.post(`${ROOT_URL}/signin`, { email, password })
+         .then(response => {
+         // If request is good...
+         // - Update state to indicate user is authenticated
+         dispatch({ type: AUTH_USER });
+         // - Save the JWT token
+         localStorage.setItem('token', response.data.token);
+         // - redirect to the route '/feature'
+         browserHistory.push('/feature');
+         })
+         .catch(() => {
+         // If request is bad...
+         // - Show an error to the user
+         dispatch(authError('Bad Login Info'));
+         });
+         */
+        //localStorage.setItem('products', {category:category, name:name, purchasePrice:purchasePrice, price:price});
+
+        dispatch({
+            type: ADD_CATEGORY,
+            category,
+            name,
+            purchasePrice,
+            price
+        });
     }
 };

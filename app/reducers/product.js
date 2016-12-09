@@ -3,7 +3,8 @@ import {
     CLOSE_PRODUCT_MODAL,
     OPEN_EDIT_PRODUCT_MODAL,
     OPEN_DELETE_PRODUCT_MODAL,
-    CLOSE_DELETE_MODAL
+    CLOSE_DELETE_MODAL,
+    ADD_PRODUCT
 } from '../constants/index';
 
 export default (state = {}, action) => {
@@ -29,6 +30,16 @@ export default (state = {}, action) => {
             return Object.assign({}, state, {
                 openDeleteProductModal : action.openDeleteProductModal
             });
+        case ADD_PRODUCT:
+            //console.log('state', state);
+            //console.log('action', action);
+
+            return [
+                ...state, {action}
+            ];
+            //return Object.assign({}, state, {
+            //    products: action
+            //});
     }
     return state;
 };

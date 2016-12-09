@@ -5,7 +5,7 @@ import Category from '../components/Category';
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        handleConf: () => {
+        close: () => {
             dispatch(openDeleteCategoryModal())
         },
         selectCategory : (id) => {

@@ -9,3 +9,6 @@ export const SELECT_CATEGORY = 'selectCategory';
 export const CLOSE_PRODUCT_MODAL = 'closeAddProductModal';
 export const CLOSE_CATEGORY_MODAL = 'closeAddCategoryModal';
 export const CLOSE_DELETE_MODAL = 'closeDeleteCategoryModal';
+
+export const ADD_PRODUCT = 'addProduct';
+export const ADD_CATEGORY = 'addCategory';
