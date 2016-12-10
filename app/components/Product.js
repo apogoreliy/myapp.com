@@ -1,14 +1,20 @@
 import React from 'react';
 
-export default ({edit, remove}) => (
+export default (props) => (
     <tr>
-        <td>1</td>
-        <td>HTC</td>
-        <td>20000</td>
-        <td>25000</td>
+        <td>{props.id}</td>
+        <td>{props.name}</td>
+        <td>{props.purchasePrice}</td>
+        <td>{props.price}</td>
         <td>
-            <button className="btn btn-default" style={{marginRight: "10px"}} onClick={()=> {edit(1)}} >Изменить</button>
-            <button className="btn btn-default" style={{marginRight: "10px"}} onClick={()=> {remove(1)}}>Удалить</button>
+            <button className="btn btn-default" style={{marginRight: "10px"}} onClick={() => {
+                props.remove(props.id)
+            }}>Удалить
+            </button>
+            <button className="btn btn-default" style={{marginRight: "10px"}} onClick={() => {
+                props.edit(props.id)
+            }}>Изменить
+            </button>
         </td>
     </tr>
 );

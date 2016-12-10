@@ -1,7 +1,8 @@
 import React from 'react';
-import HandleProduct from '../containers/HandleProduct'
+import Product from './Product'
 
-export default () => (
+export default ({products, edit, remove}) => {
+    return(
     <div className="col-md-9">
         <table className="table">
             <thead>
@@ -14,8 +15,19 @@ export default () => (
                 </tr>
             </thead>
             <tbody>
-                <HandleProduct />
+            {!products ? "" :
+                products.map((p, index) => {
+                    return <Product
+                                    id={p.productID}
+                                    name={p.name}
+                                    price={p.price}
+                                    purchasePrice={p.purchasePrice}
+                                    key={index}
+                                    edit={edit}
+                                    remove={remove} />
+                })
+            }
             </tbody>
         </table>
     </div>
-);
+)};

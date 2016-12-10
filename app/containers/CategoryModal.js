@@ -32,7 +32,7 @@ const CategoryModal =({confirm, close, headerTitle, handleClick}) => {
             <div style={{display: confirm ? "block" : "none"}} className="modal-backdrop in"></div>
         </div>
     );
-}
+};
 
 const mapStateToProps = (state) => {
     return {
@@ -46,8 +46,8 @@ const mapDispatchToProps = (dispatch) => {
         close: () => {
             dispatch(closeCategoryModal())
         },
-        handleClick : () => {
-            dispatch(addCategory())
+        handleClick : (name) => {
+            dispatch(addCategory(name))
         }
     }
 };

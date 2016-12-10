@@ -4,10 +4,14 @@ import {
     OPEN_EDIT_PRODUCT_MODAL,
     OPEN_DELETE_PRODUCT_MODAL,
     CLOSE_DELETE_MODAL,
-    ADD_PRODUCT
+    ADD_PRODUCT,
+    EDIT_PRODUCT,
+    REMOVE_PRODUCT
 } from '../constants/index';
 
 export default (state = {}, action) => {
+    let prod = state.products ? state.products : "";
+
     switch (action.type) {
         case OPEN_ADD_PRODUCT_MODAL:
             return Object.assign({}, state, {
@@ -16,30 +20,47 @@ export default (state = {}, action) => {
         case CLOSE_PRODUCT_MODAL:
             return Object.assign({}, state, {
                 openAddProductModal : action.openAddProductModal,
-                openEditProductModal: action.openEditProductModal
+                openEditProductModal: action.openEditProductModal,
+                productID:null
             });
         case OPEN_EDIT_PRODUCT_MODAL:
             return Object.assign({}, state, {
-                openEditProductModal : action.openEditProductModal
+                openEditProductModal : action.openEditProductModal,
+                productID : action.productID
             });
         case OPEN_DELETE_PRODUCT_MODAL:
             return Object.assign({}, state, {
-                openDeleteProductModal : action.openDeleteProductModal
+                openDeleteProductModal : action.openDeleteProductModal,
+                productID : action.productID
             });
         case CLOSE_DELETE_MODAL:
             return Object.assign({}, state, {
-                openDeleteProductModal : action.openDeleteProductModal
+                openDeleteProductModal : action.openDeleteProductModal,
+                productID : null
             });
         case ADD_PRODUCT:
-            //console.log('state', state);
-            //console.log('action', action);
-
-            return [
-                ...state, {action}
-            ];
-            //return Object.assign({}, state, {
-            //    products: action
-            //});
+            return Object.assign({}, state, {
+                products : [...prod, action]
+            });
+        case EDIT_PRODUCT:
+            prod = state.products.map( p =>{
+                if(p.productID === state.productID){
+                    let pr = action;
+                    pr.productID = p.productID;
+                    return pr;
+                }
+                return p;
+            });
+            return Object.assign({}, state, {
+                products : [...prod]
+            });
+        case REMOVE_PRODUCT:
+            let p = state.products.filter( f => {
+                return f.productID !== state.productID;
+            });
+            return Object.assign({}, state, {
+                products : [...p]
+            });
     }
     return state;
 };

@@ -1,24 +1,24 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { closeDeleteModal } from '../actions'
+import { closeDeleteModal, removeCategory, removeProduct } from '../actions'
 
-const DeleteModal = ({confirm, close, headerTitle, bodyText}) => (
+const DeleteModal = ({dispatch ,confirm, close, headerTitle, bodyText, mode, id}) => (
     <div>
         <div style={{display: confirm ? "block" : "none"}} className="modal in" role="dialog"
              aria-labelledby="modal-label">
             <div className="modal-dialog" role="document">
                 <div className="modal-content">
-                    <button type="button" onClick={close} className="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" onClick={()=>dispatch(closeDeleteModal())}
+                            className="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
-                    <h4 className="modal-title" style={{textAlign: "center"}}>{headerTitle}</h4>
-                    <div style={{textAlign: "center"}}>
-                        {bodyText}
-                    </div>
+                    <h4 className="modal-title" style={{textAlign: "center"}}>{mode ? headerTitle : headerTitle+' ID-'+id}</h4>
+                    <div style={{textAlign: "center"}}> {bodyText}</div>
                 </div>
                 <div className="modal-footer">
-                    <button type="button" className="btn btn-primary" onClick={close}>
-                        Сохранить
+                    <button type="button" className="btn btn-primary"
+                            onClick={() => dispatch(mode ? removeCategory() : removeProduct())}>
+                        Удалить
                     </button>
                 </div>
             </div>
@@ -29,21 +29,14 @@ const DeleteModal = ({confirm, close, headerTitle, bodyText}) => (
 
 const mapStateToProps = (state) => {
     return {
+        id : state.product.productID,
+        mode : state.category.openDeleteCategoryModal,
         confirm : state.category.openDeleteCategoryModal || state.product.openDeleteProductModal,
         headerTitle : state.category.openDeleteCategoryModal ? "Хотите удалить категорию" : "Точно удалить товар",
         bodyText : state.category.openDeleteCategoryModal ? "Все товары этой категории будут помечены 'Без категории'" : ""
     }
 };
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        close: () => {
-            dispatch(closeDeleteModal())
-        }
-    }
-};
-
 export default connect(
-    mapStateToProps,
-    mapDispatchToProps
+    mapStateToProps
 )(DeleteModal);

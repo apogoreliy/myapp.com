@@ -3,10 +3,16 @@ import { connect } from 'react-redux'
 import { openDeleteCategoryModal, selectCategory } from '../actions'
 import Category from '../components/Category';
 
+const mapStateToProps = (state) => {
+    return {
+        categories: state.category.categories
+    }
+};
+
 const mapDispatchToProps = (dispatch) => {
     return {
-        close: () => {
-            dispatch(openDeleteCategoryModal())
+        handleClick: (id) => {
+            dispatch(openDeleteCategoryModal(id))
         },
         selectCategory : (id) => {
             dispatch(selectCategory(id))
@@ -15,6 +21,6 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps
 )(Category);

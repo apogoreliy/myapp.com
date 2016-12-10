@@ -1,7 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { openEditProductModal, openDeleteProductModal } from '../actions'
-import Product from '../components/Product';
+import ProductList from '../components/ProductList';
+
+const mapStateToProps = (state) => {
+    return {
+        products: state.product.products ? state.product.products.filter(p => {
+            return parseInt(p.category) === (state.category.selectedCategory ? state.category.selectedCategory : 0)
+        }) : null
+    }
+};
 
 const mapDispatchToProps = (dispatch) => {
     return {
@@ -15,6 +23,6 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps
-)(Product);
+)(ProductList);

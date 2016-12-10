@@ -12,3 +12,7 @@ export const CLOSE_DELETE_MODAL = 'closeDeleteCategoryModal';
 
 export const ADD_PRODUCT = 'addProduct';
 export const ADD_CATEGORY = 'addCategory';
+export const REMOVE_CATEGORY = 'removeCategory';
+
+export const EDIT_PRODUCT = 'editProduct';
+export const REMOVE_PRODUCT = 'removeProduct';

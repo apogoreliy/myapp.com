@@ -1,10 +1,10 @@
 import React from 'react';
-import CategoryList from './CategoryList';
-import ProductList from './ProductList';
+import HandleProduct from '../containers/HandleProduct';
+import HandleCategory from '../containers/HandleCategory'
 
 export default () => (
     <div className="">
-        <CategoryList />
-        <ProductList />
+        <HandleCategory />
+        <HandleProduct />
     </div>
 );

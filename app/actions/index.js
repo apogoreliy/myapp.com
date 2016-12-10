@@ -9,9 +9,11 @@ import {
     OPEN_EDIT_PRODUCT_MODAL,
     OPEN_DELETE_PRODUCT_MODAL,
     ADD_PRODUCT,
-    ADD_CATEGORY
+    ADD_CATEGORY,
+    REMOVE_CATEGORY,
+    EDIT_PRODUCT,
+    REMOVE_PRODUCT
 } from '../constants/index';
-import axios from 'axios';
 
 export const openProductModal = () => {
     return {
@@ -42,10 +44,11 @@ export const closeCategoryModal = () => {
     }
 };
 
-export const openDeleteCategoryModal = () => {
+export const openDeleteCategoryModal = (id) => {
     return {
         type: OPEN_DELETE_CATEGORY_MODAL,
-        openDeleteCategoryModal : true
+        openDeleteCategoryModal : true,
+        categoryID : id
     }
 };
 
@@ -57,103 +60,87 @@ export const closeDeleteModal = () => {
     }
 };
 
-export const selectCategory = (selected_category) => {
+export const selectCategory = (selectedCategory) => {
     return {
         type: SELECT_CATEGORY,
-        selected_category
+        selectedCategory
     }
 };
 
-export const openEditProductModal = () => {
+export const openEditProductModal = (id) => {
     return {
         type: OPEN_EDIT_PRODUCT_MODAL,
-        openEditProductModal : true
+        openEditProductModal : true,
+        productID : id
     }
 };
 
-export const openDeleteProductModal = () => {
+export const openDeleteProductModal = (id) => {
     return {
         type: OPEN_DELETE_PRODUCT_MODAL,
-        openDeleteProductModal : true
+        openDeleteProductModal : true,
+        productID : id
     }
 };
 
+let productID = 0;
 export const addProduct = (category, name, purchasePrice, price) => {
     return function(dispatch) {
-        dispatch(closeProductModal());
-
-/*
-        axios.post(`${ROOT_URL}/signin`, { email, password })
-            .then(response => {
-                // If request is good...
-                // - Update state to indicate user is authenticated
-                dispatch({ type: AUTH_USER });
-                // - Save the JWT token
-                localStorage.setItem('token', response.data.token);
-                // - redirect to the route '/feature'
-                browserHistory.push('/feature');
-            })
-            .catch(() => {
-                // If request is bad...
-                // - Show an error to the user
-                dispatch(authError('Bad Login Info'));
-            });
-*/
-        //localStorage.setItem('products', {category:category, name:name, purchasePrice:purchasePrice, price:price});
-
         dispatch({
             type: ADD_PRODUCT,
             category,
             name,
             purchasePrice,
-            price
+            price,
+            productID: productID++
         });
+        dispatch(closeProductModal());
     }
 };
 
-export const editProduct = (id) => {
-    return {
-        type: SELECT_CATEGORY,
-        edited_product_id : id
-    }
-};
-
-export const removeProduct = (id) => {
-    return {
-        type: SELECT_CATEGORY,
-        removed_product_id : id
-    }
-};
-
-export const addCategory = (name) => {
+export const editProduct = (category, name, purchasePrice, price) => {
     return function(dispatch) {
-        dispatch(closeCategoryModal());
-
-        /*
-         axios.post(`${ROOT_URL}/signin`, { email, password })
-         .then(response => {
-         // If request is good...
-         // - Update state to indicate user is authenticated
-         dispatch({ type: AUTH_USER });
-         // - Save the JWT token
-         localStorage.setItem('token', response.data.token);
-         // - redirect to the route '/feature'
-         browserHistory.push('/feature');
-         })
-         .catch(() => {
-         // If request is bad...
-         // - Show an error to the user
-         dispatch(authError('Bad Login Info'));
-         });
-         */
-        //localStorage.setItem('products', {category:category, name:name, purchasePrice:purchasePrice, price:price});
-
         dispatch({
-            type: ADD_CATEGORY,
+            type: EDIT_PRODUCT,
             category,
             name,
             purchasePrice,
             price
         });
+
+        dispatch(closeProductModal());
+    }
+};
+
+export const removeProduct = () => {
+    return function(dispatch) {
+        dispatch({
+            type: REMOVE_PRODUCT
+        });
+
+        dispatch(closeDeleteModal());
+    }
+};
+
+export const removeCategory = () => {
+    return function(dispatch) {
+        dispatch({
+            type: REMOVE_CATEGORY
+        });
+
+        dispatch(closeDeleteModal());
+    }
+};
+
+let categoryID = 0;
+export const addCategory = (name) => {
+    return function(dispatch) {
+        dispatch({
+            type: ADD_CATEGORY,
+            name,
+            categoryID : categoryID++
+        });
+
+        dispatch(closeCategoryModal());
     }
 };
