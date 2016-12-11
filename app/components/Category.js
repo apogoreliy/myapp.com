@@ -1,6 +1,7 @@
 import React from 'react';
 
 export default (props) => {
+    console.log(props.categories);
     return(
         <div className="col-md-3">
             {!props.categories ? <div></div> : props.categories.map((c, index) => {

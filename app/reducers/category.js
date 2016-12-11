@@ -5,10 +5,12 @@ import {
     CLOSE_DELETE_MODAL,
     SELECT_CATEGORY,
     ADD_CATEGORY,
-    REMOVE_CATEGORY
-} from '../constants/index';
+    REMOVE_CATEGORY,
+    GET_CATEGORIES
+} from '../actions/types';
 
 export default (state = {}, action) => {
+    let categories = state.categories ? state.categories : "";
     switch (action.type) {
         case CLOSE_CATEGORY_MODAL:
             return Object.assign({}, state, {
@@ -34,7 +36,6 @@ export default (state = {}, action) => {
                 selectedCategory : action.selectedCategory
             });
         case ADD_CATEGORY:
-            let categories = state.categories ? state.categories : "";
             return Object.assign({}, state, {
                 categories : [...categories, action.name]
             });
@@ -45,6 +46,10 @@ export default (state = {}, action) => {
 
             return Object.assign({}, state, {
                 categories : [...c]
+            });
+        case GET_CATEGORIES:
+            return Object.assign({}, state, {
+                categories : [...categories, action.categories]
             });
     }
     return state;

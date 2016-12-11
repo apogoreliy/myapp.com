@@ -16,3 +16,6 @@ export const REMOVE_CATEGORY = 'removeCategory';
 
 export const EDIT_PRODUCT = 'editProduct';
 export const REMOVE_PRODUCT = 'removeProduct';
+
+export const GET_PRODUCTS = 'getProducts';
+export const GET_CATEGORIES = 'getCategories';

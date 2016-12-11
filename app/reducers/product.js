@@ -6,8 +6,9 @@ import {
     CLOSE_DELETE_MODAL,
     ADD_PRODUCT,
     EDIT_PRODUCT,
-    REMOVE_PRODUCT
-} from '../constants/index';
+    REMOVE_PRODUCT,
+    GET_PRODUCTS
+} from '../actions/types';
 
 export default (state = {}, action) => {
     let prod = state.products ? state.products : "";
@@ -41,6 +42,12 @@ export default (state = {}, action) => {
         case ADD_PRODUCT:
             return Object.assign({}, state, {
                 products : [...prod, action]
+            });
+        case GET_PRODUCTS:
+            console.log('state', action);
+            console.log('acts', action);
+            return Object.assign({}, state, {
+                products : [...prod, action.products]
             });
         case EDIT_PRODUCT:
             prod = state.products.map( p =>{
