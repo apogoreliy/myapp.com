@@ -66,7 +66,7 @@ class ProductModal extends Component{
         this.setState({price : e.target.value})
     }
 
-    
+
     render() {
         return (
             <div>
