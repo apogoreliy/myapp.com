@@ -19,7 +19,7 @@ import {
 import axios from 'axios';
 //const ROOT_URL = process.env.PORT || 3000;
 //const ROOT_URL = 'http://localhost:3000';
-const ROOT_URL = 'https://warm-garden-46587.herokuapp.com/';
+const ROOT_URL = 'https://warm-garden-46587.herokuapp.com';
 
 //general actions
 export const closeDeleteModal = () => {
