@@ -47,7 +47,7 @@ export default (state = {}, action) => {
             return Object.assign({}, state, action.products);
 
         case EDIT_PRODUCT:
-            prod = state.products.map( p =>{
+            prod = state.prods.map( p =>{
                 if(p.productID === state.productID){
                     let pr = action;
                     pr.productID = p.productID;
@@ -56,7 +56,7 @@ export default (state = {}, action) => {
                 return p;
             });
             return Object.assign({}, state, {
-                products : [...prod]
+                prods : [...prod]
             });
         case REMOVE_PRODUCT:
             let p = state.prods.filter( f => {

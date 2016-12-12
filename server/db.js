@@ -51,16 +51,15 @@ module.exports = {
     },
 
     editProduct : function(product){
-        // a:2 -> what we need to change
-        // $set: {b:1} -> by what to change
-        console.log('prod', product);
         const that =this;
         return new Promise(function(resolve, reject) {
             that.connection().then(function(db) {
                 const collection = db.collection('products');
-                collection.updateOne({a:2},{$set:{b:1}}, function(err, items) {
-                    err ? reject(err) : resolve(items);
-                });
+                collection.updateOne(
+                    {productID : product.productID},
+                    {$set:{categoryID:product.categoryID,
+                    name:product.name, price:product.price, purchasePrice:product.purchasePrice}},
+                    function(err, items) { err ? reject(err) : resolve(items);});
             });
         });
     },

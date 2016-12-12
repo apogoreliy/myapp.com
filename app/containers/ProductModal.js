@@ -6,15 +6,7 @@ class ProductModal extends Component{
     constructor(props){
         super(props);
 
-        console.log('props', props);
-
-        this.state = {
-            categoryID : this.props.product ? this.props.product.categoryID :
-                ( this.props.selectedCategory ? this.props.selectedCategory : 0 ),
-            name : this.props.product ? this.props.product.name : "",
-            purchasePrice : this.props.product ? this.props.product.name : "",
-            price : this.props.product ? this.props.product.price : ""
-        };
+        this.state = { categoryID : 0, name : "", purchasePrice : "", price : "" };
 
         this.cancelClick = this.cancelClick.bind(this);
         this.handleClickBtn = this.handleClickBtn.bind(this);
@@ -22,6 +14,16 @@ class ProductModal extends Component{
         this.handleChangeName = this.handleChangeName.bind(this);
         this.handleChangePurchasePrice = this.handleChangePurchasePrice.bind(this);
         this.handleChangePrice = this.handleChangePrice.bind(this);
+    }
+
+    componentWillReceiveProps(nextProps){
+        this.setState({
+            categoryID : nextProps.product ? nextProps.product[0].categoryID :
+                ( nextProps.selectedCategory ? nextProps.selectedCategory : 0 ),
+            name : nextProps.product ? nextProps.product[0].name : "",
+            purchasePrice : nextProps.product ? nextProps.product[0].purchasePrice : "",
+            price : nextProps.product ? nextProps.product[0].price : ""
+        });
     }
 
     renderCategories (categories) {
@@ -37,8 +39,15 @@ class ProductModal extends Component{
         return arr;
     }
 
+    resetState(){
+        this.setState({
+            name:"", purchasePrice: "", price : "", categoryID : 0
+        })
+    }
+
     cancelClick () {
-        this.props.dispatch(closeProductModal())
+        this.resetState();
+        this.props.dispatch(closeProductModal());
     }
 
     handleClickBtn(){
@@ -49,14 +58,13 @@ class ProductModal extends Component{
         this.props.mode ?
             this.props.dispatch(addProduct(this.state.categoryID, this.state.name, this.state.purchasePrice, this.state.price)) :
             this.props.dispatch(editProduct(this.props.productID, this.state.categoryID, this.state.name, this.state.purchasePrice, this.state.price));
+        this.resetState();
     }
 
     handleChangeCategory(e){
         this.setState({categoryID : e.target.value})
     }
     handleChangeName(e){
-        console.log(e.target.value);
-
         this.setState({name : e.target.value})
     }
     handleChangePurchasePrice(e){
@@ -65,7 +73,6 @@ class ProductModal extends Component{
     handleChangePrice(e){
         this.setState({price : e.target.value})
     }
-
 
     render() {
         return (
@@ -130,12 +137,10 @@ class ProductModal extends Component{
 }
 
 const mapStateToProps = (state) => {
-    console.log('state', state);
-
     return {
-        productID : state.productID,
+        productID : state.product.productID,
         mode : state.product.openAddProductModal,
-        product: state.product.openEditProductModal ? state.product.prods[state.product.productID] : null,
+        product: state.product.openEditProductModal ? state.product.prods.filter( p =>{return p.productID === state.product.productID}) : null,
         categories : state.category.cats,
         selectedCategory : state.category.selectedCategory,
         confirm : state.product.openAddProductModal || state.product.openEditProductModal,

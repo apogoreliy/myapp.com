@@ -18,8 +18,8 @@ import {
 } from './types';
 import axios from 'axios';
 //const ROOT_URL = process.env.PORT || 3000;
-//const ROOT_URL = 'http://localhost:3000';
-const ROOT_URL = 'https://warm-garden-46587.herokuapp.com';
+const ROOT_URL = 'http://localhost:3000';
+//const ROOT_URL = 'https://warm-garden-46587.herokuapp.com';
 
 //general actions
 export const closeDeleteModal = () => {
@@ -69,7 +69,6 @@ export const addProduct = (categoryID, name, purchasePrice, price) => {
 
 export const editProduct = (productID, categoryID, name, purchasePrice, price) => {
     return function(dispatch) {
-        console.log(productID, categoryID, name, purchasePrice, price);
         axios.post(`${ROOT_URL}/edit_product`, {productID, categoryID, name, purchasePrice, price})
             .then(() => {
                 dispatch({

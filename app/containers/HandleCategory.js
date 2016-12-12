@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { openDeleteCategoryModal, selectCategory } from '../actions'
-import Category from '../components/Category';
+import { openDeleteCategoryModal, selectCategory, fetchCategories } from '../actions'
+import CategoriesList from '../components/CategoriesList';
 
 const mapStateToProps = (state) => {
     return {
@@ -16,6 +16,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         selectCategory : (id) => {
             dispatch(selectCategory(id))
+        },
+        fetchCategories : ()=> {
+            dispatch(fetchCategories())
         }
     }
 };
@@ -23,4 +26,4 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(Category);
+)(CategoriesList);

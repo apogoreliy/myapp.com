@@ -1,36 +1,51 @@
-import React from 'react';
+import React, {Component} from 'react';
 import Product from './Product'
+import ProductModal from '../containers/ProductModal';
 
-const renderProducts = (products, edit, remove) => {
-    let arr = [];
-    for (let j in products){
-        if( products.hasOwnProperty( j ) ) {
-            let p = products[j];
-            arr.push (
-                <Product id={p.productID} name={p.name} price={p.price}
-                purchasePrice={p.purchasePrice} key={'product'+p.productID} edit={edit} remove={remove} />
-            )
-        }
+class ProductList extends Component {
+    constructor(props){
+        super(props);
     }
-    return arr;
-};
 
-export default ({products, edit, remove}) => {
-    return(
-    <div className="col-md-9">
-        <table className="table table-hover">
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Название товара</th>
-                    <th>Цена / зак.</th>
-                    <th>Цена</th>
-                    <th>&#032;</th>
-                </tr>
-            </thead>
-            <tbody>
-            {products && renderProducts(products, edit, remove)}
-            </tbody>
-        </table>
-    </div>
-)};
+    componentWillMount(){
+        this.props.fetchProducts();
+    }
+
+    renderProducts() {
+        let arr = [];
+        for (let j in this.props.products) {
+            if (this.props.products.hasOwnProperty(j)) {
+                let p = this.props.products[j];
+                arr.push(
+                    <Product id={p.productID} name={p.name} price={p.price}
+                             purchasePrice={p.purchasePrice} key={'product' + p.productID} edit={this.props.edit}
+                             remove={this.props.remove}/>
+                )
+            }
+        }
+        return arr;
+    }
+
+    render() {
+        return (
+            <div className="col-md-9">
+                <table className="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Название товара</th>
+                        <th>Цена / зак.</th>
+                        <th>Цена</th>
+                        <th>&#032;</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {this.props.products && this.renderProducts()}
+                    </tbody>
+                </table>
+                <ProductModal />
+            </div>)
+    }
+}
+
+export default ProductList;
