@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7489429e-481c-465e-9a6a-41aa2e700c68" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/actions/index.js" afterPath="$PROJECT_DIR$/app/actions/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/reducers/category.js" afterPath="$PROJECT_DIR$/app/reducers/category.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/reducers/product.js" afterPath="$PROJECT_DIR$/app/reducers/product.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/bundle.js" afterPath="$PROJECT_DIR$/public/bundle.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/db.js" afterPath="$PROJECT_DIR$/server/db.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/router.js" afterPath="$PROJECT_DIR$/server/router.js" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -52,10 +46,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="db.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="db.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/server/db.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="336">
+            <state relative-caret-position="1309">
               <caret line="185" column="44" lean-forward="false" selection-start-line="185" selection-start-column="44" selection-end-line="185" selection-end-column="44" />
               <folding>
                 <element signature="e#469#1324#0" expanded="false" />
@@ -72,11 +66,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/actions/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="215">
-              <caret line="138" column="31" lean-forward="true" selection-start-line="138" selection-start-column="31" selection-end-line="138" selection-end-column="31" />
+            <state relative-caret-position="34">
+              <caret line="20" column="2" lean-forward="false" selection-start-line="20" selection-start-column="2" selection-end-line="20" selection-end-column="2" />
               <folding>
                 <element signature="e#636#772#0" expanded="false" />
                 <element signature="e#841#962#0" expanded="false" />
@@ -212,9 +206,9 @@
         <option value="$PROJECT_DIR$/app/reducers/category.js" />
         <option value="$PROJECT_DIR$/server/test.js" />
         <option value="$PROJECT_DIR$/server/router.js" />
-        <option value="$PROJECT_DIR$/app/actions/index.js" />
         <option value="$PROJECT_DIR$/app/reducers/product.js" />
         <option value="$PROJECT_DIR$/server/db.js" />
+        <option value="$PROJECT_DIR$/app/actions/index.js" />
       </list>
     </option>
   </component>
@@ -482,12 +476,12 @@
       <workItem from="1481276730468" duration="73915000" />
       <workItem from="1481440326099" duration="10208000" />
       <workItem from="1481477733102" duration="8716000" />
-      <workItem from="1481487800326" duration="73477000" />
+      <workItem from="1481487800326" duration="73747000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="195974000" />
+    <option name="totallyTimeSpent" value="196244000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -806,10 +800,28 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/server/db.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1309">
+          <caret line="185" column="44" lean-forward="false" selection-start-line="185" selection-start-column="44" selection-end-line="185" selection-end-column="44" />
+          <folding>
+            <element signature="e#469#1324#0" expanded="false" />
+            <element signature="e#1363#2095#0" expanded="false" />
+            <element signature="e#2133#2717#0" expanded="false" />
+            <element signature="e#2756#3156#0" expanded="false" />
+            <element signature="e#3206#4612#0" expanded="false" />
+            <element signature="e#5621#6025#0" expanded="false" />
+            <element signature="e#6071#6447#0" expanded="false" />
+            <element signature="e#8269#8638#0" expanded="false" />
+            <element signature="e#8670#9041#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/actions/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="215">
-          <caret line="138" column="31" lean-forward="true" selection-start-line="138" selection-start-column="31" selection-end-line="138" selection-end-column="31" />
+        <state relative-caret-position="34">
+          <caret line="20" column="2" lean-forward="false" selection-start-line="20" selection-start-column="2" selection-end-line="20" selection-end-column="2" />
           <folding>
             <element signature="e#636#772#0" expanded="false" />
             <element signature="e#841#962#0" expanded="false" />
@@ -825,24 +837,6 @@
             <element signature="e#5192#5289#0" expanded="false" />
             <element signature="e#5332#5427#0" expanded="false" />
             <element signature="e#5477#5605#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/db.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="185" column="44" lean-forward="false" selection-start-line="185" selection-start-column="44" selection-end-line="185" selection-end-column="44" />
-          <folding>
-            <element signature="e#469#1324#0" expanded="false" />
-            <element signature="e#1363#2095#0" expanded="false" />
-            <element signature="e#2133#2717#0" expanded="false" />
-            <element signature="e#2756#3156#0" expanded="false" />
-            <element signature="e#3206#4612#0" expanded="false" />
-            <element signature="e#5621#6025#0" expanded="false" />
-            <element signature="e#6071#6447#0" expanded="false" />
-            <element signature="e#8269#8638#0" expanded="false" />
-            <element signature="e#8670#9041#0" expanded="false" />
           </folding>
         </state>
       </provider>
