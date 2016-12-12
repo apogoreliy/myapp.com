@@ -60,7 +60,7 @@ export default (state = {}, action) => {
             });
         case REMOVE_PRODUCT:
             let p = state.prods.filter( f => {
-                return f.productID !== state.productID;
+                return f.productID !== action.productID;
             });
 
             return Object.assign({}, state, {

@@ -49,6 +49,7 @@ export const openDeleteProductModal = (id) => {
 
 export const addProduct = (categoryID, name, purchasePrice, price) => {
     return function(dispatch) {
+        dispatch(closeProductModal());
         axios.post(`${ROOT_URL}/add_product`, {categoryID, name, purchasePrice, price})
             .then((response) => {
                 dispatch({
@@ -59,7 +60,6 @@ export const addProduct = (categoryID, name, purchasePrice, price) => {
                     price,
                     productID: response.data.productID
                 });
-                dispatch(closeProductModal());
             })
             .catch(err => {
                 console.log('err', err)
@@ -89,13 +89,13 @@ export const editProduct = (productID, categoryID, name, purchasePrice, price) =
 
 export const removeProduct = (id) => {
     return function(dispatch) {
+        dispatch(closeDeleteModal());
         axios.post(`${ROOT_URL}/remove_product`, {id})
             .then(() => {
                 dispatch({
-                    type: REMOVE_PRODUCT
+                    type: REMOVE_PRODUCT,
+                    productID : id
                 });
-
-                dispatch(closeDeleteModal());
             })
             .catch(err => {
                 console.log('err', err)
@@ -137,13 +137,18 @@ export const closeProductModal = () => {
 //action for categories
 export const removeCategory = (id) => {
     return function(dispatch) {
+        dispatch(closeDeleteModal());
         axios.post(`${ROOT_URL}/remove_category`, {id})
-            .then(() => {
+            .then((response) => {
                 dispatch({
-                    type: REMOVE_CATEGORY
+                    type: REMOVE_CATEGORY,
+                    categories: {cats : response.data.cats}
                 });
 
-                dispatch(closeDeleteModal());
+                dispatch({
+                    type: GET_PRODUCTS,
+                    products: {prods : response.data.prods}
+                });
             })
             .catch(err => {
                 console.log('err', err)
@@ -153,6 +158,7 @@ export const removeCategory = (id) => {
 
 export const addCategory = (name) => {
     return function(dispatch) {
+        dispatch(closeCategoryModal());
         axios.post(`${ROOT_URL}/add_category`, {name})
             .then(response => {
                 dispatch({
@@ -160,7 +166,6 @@ export const addCategory = (name) => {
                     name,
                     categoryID : response.data.categoryID
                 });
-                dispatch(closeCategoryModal());
             })
             .catch(err => {
                 console.log('err', err)

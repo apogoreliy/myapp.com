@@ -44,13 +44,6 @@ export default (state = {}, action) => {
             });
 
         case REMOVE_CATEGORY:
-            let c = state.cats ? state.cats.filter(f => {
-                return f.categoryID !== state.categoryID;
-            }) : "";
-
-            return Object.assign({}, state, {
-                cats : [...c]
-            });
         case GET_CATEGORIES:
             return Object.assign({}, state, action.categories);
     }

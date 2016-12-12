@@ -34,8 +34,8 @@ module.exports = (app) =>{
     });
 
     app.post('/remove_category', (req, res) =>{
-        DB.removeCategory(req.body.id).then(function() {
-            res.send("ok");
+        DB.handleCategory(req.body.id).then(function(items) {
+            res.json(items);
         }, function(err) {
             console.error('The promise was rejected', err, err.stack);
         });
