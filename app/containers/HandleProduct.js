@@ -4,10 +4,9 @@ import { openEditProductModal, openDeleteProductModal } from '../actions'
 import ProductList from '../components/ProductList';
 
 const mapStateToProps = (state) => {
-    console.log('sta', state);
     return {
-        products: state.product.products ? state.product.products.filter(p => {
-            return parseInt(p.category) === (state.category.selectedCategory ? state.category.selectedCategory : 0)
+        products: state.product.prods ? state.product.prods.filter(p => {
+            return parseInt(p.categoryID) === (state.category.selectedCategory ? state.category.selectedCategory : 0)
         }) : null
     }
 };

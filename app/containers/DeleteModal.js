@@ -17,7 +17,7 @@ const DeleteModal = ({dispatch ,confirm, close, headerTitle, bodyText, mode, id}
                 </div>
                 <div className="modal-footer">
                     <button type="button" className="btn btn-primary"
-                            onClick={() => dispatch(mode ? removeCategory() : removeProduct())}>
+                            onClick={() => dispatch(mode ? removeCategory(id) : removeProduct(id))}>
                         Удалить
                     </button>
                 </div>
@@ -29,7 +29,7 @@ const DeleteModal = ({dispatch ,confirm, close, headerTitle, bodyText, mode, id}
 
 const mapStateToProps = (state) => {
     return {
-        id : state.product.productID,
+        id : state.category.openDeleteCategoryModal ? state.category.categoryID : state.product.productID,
         mode : state.category.openDeleteCategoryModal,
         confirm : state.category.openDeleteCategoryModal || state.product.openDeleteProductModal,
         headerTitle : state.category.openDeleteCategoryModal ? "Хотите удалить категорию" : "Точно удалить товар",

@@ -20,6 +20,104 @@ import axios from 'axios';
 //const ROOT_URL = process.env.PORT || 3000;
 const ROOT_URL = 'http://localhost:3000';
 
+//general actions
+export const closeDeleteModal = () => {
+    return {
+        type: CLOSE_DELETE_MODAL,
+        openDeleteCategoryModal : false,
+        openDeleteProductModal : false
+    }
+};
+
+//action for products
+export const openEditProductModal = (id) => {
+    return {
+        type: OPEN_EDIT_PRODUCT_MODAL,
+        openEditProductModal : true,
+        productID : id
+    }
+};
+
+export const openDeleteProductModal = (id) => {
+    return {
+        type: OPEN_DELETE_PRODUCT_MODAL,
+        openDeleteProductModal : true,
+        productID : id
+    }
+};
+
+export const addProduct = (categoryID, name, purchasePrice, price) => {
+    return function(dispatch) {
+        axios.post(`${ROOT_URL}/add_product`, {categoryID, name, purchasePrice, price})
+            .then((response) => {
+                dispatch({
+                    type: ADD_PRODUCT,
+                    categoryID,
+                    name,
+                    purchasePrice,
+                    price,
+                    productID: response.data.productID
+                });
+                dispatch(closeProductModal());
+            })
+            .catch(err => {
+                console.log('err', err)
+            });
+    }
+};
+
+export const editProduct = (productID, categoryID, name, purchasePrice, price) => {
+    return function(dispatch) {
+        console.log(productID, categoryID, name, purchasePrice, price);
+        axios.post(`${ROOT_URL}/edit_product`, {productID, categoryID, name, purchasePrice, price})
+            .then(() => {
+                dispatch({
+                    type: EDIT_PRODUCT,
+                    categoryID,
+                    name,
+                    purchasePrice,
+                    price
+                });
+
+                dispatch(closeProductModal());
+            })
+            .catch(err => {
+                console.log('err', err)
+            });
+    }
+};
+
+export const removeProduct = (id) => {
+    return function(dispatch) {
+        axios.post(`${ROOT_URL}/remove_product`, {id})
+            .then(() => {
+                dispatch({
+                    type: REMOVE_PRODUCT
+                });
+
+                dispatch(closeDeleteModal());
+            })
+            .catch(err => {
+                console.log('err', err)
+            });
+    }
+};
+
+export const fetchProducts = () => {
+    return function(dispatch) {
+        axios.get(`${ROOT_URL}/get_products`)
+            .then(response => {
+                dispatch({
+                    type: GET_PRODUCTS,
+                    products: {prods :response.data}
+                });
+            })
+            .catch(err => {
+                console.log('err', err)
+            });
+    }
+};
+
 export const openProductModal = () => {
     return {
         type: OPEN_ADD_PRODUCT_MODAL,
@@ -32,6 +130,63 @@ export const closeProductModal = () => {
         type: CLOSE_PRODUCT_MODAL,
         openAddProductModal : false,
         openEditProductModal: false
+    }
+};
+
+
+//action for categories
+export const removeCategory = (id) => {
+    return function(dispatch) {
+        axios.post(`${ROOT_URL}/remove_category`, {id})
+            .then(() => {
+                dispatch({
+                    type: REMOVE_CATEGORY
+                });
+
+                dispatch(closeDeleteModal());
+            })
+            .catch(err => {
+                console.log('err', err)
+            });
+    }
+};
+
+export const addCategory = (name) => {
+    return function(dispatch) {
+        axios.post(`${ROOT_URL}/add_category`, {name})
+            .then(response => {
+                dispatch({
+                    type: ADD_CATEGORY,
+                    name,
+                    categoryID : response.data.categoryID
+                });
+                dispatch(closeCategoryModal());
+            })
+            .catch(err => {
+                console.log('err', err)
+            });
+    }
+};
+
+export const fetchCategories = () => {
+    return function(dispatch) {
+        axios.get(`${ROOT_URL}/get_categories`)
+            .then(response => {
+                dispatch({
+                    type: GET_CATEGORIES,
+                    categories: {cats : response.data}
+                });
+            })
+            .catch(err => {
+                console.log('err', err)
+            });
+    }
+};
+
+export const selectCategory = (selectedCategory) => {
+    return {
+        type: SELECT_CATEGORY,
+        selectedCategory
     }
 };
 
@@ -54,158 +209,5 @@ export const openDeleteCategoryModal = (id) => {
         type: OPEN_DELETE_CATEGORY_MODAL,
         openDeleteCategoryModal : true,
         categoryID : id
-    }
-};
-
-export const closeDeleteModal = () => {
-    return {
-        type: CLOSE_DELETE_MODAL,
-        openDeleteCategoryModal : false,
-        openDeleteProductModal : false
-    }
-};
-
-export const selectCategory = (selectedCategory) => {
-    return {
-        type: SELECT_CATEGORY,
-        selectedCategory
-    }
-};
-
-export const openEditProductModal = (id) => {
-    return {
-        type: OPEN_EDIT_PRODUCT_MODAL,
-        openEditProductModal : true,
-        productID : id
-    }
-};
-
-export const openDeleteProductModal = (id) => {
-    return {
-        type: OPEN_DELETE_PRODUCT_MODAL,
-        openDeleteProductModal : true,
-        productID : id
-    }
-};
-
-let productID = 0;
-export const addProduct = (category, name, purchasePrice, price) => {
-    return function(dispatch) {
-        axios.post(`${ROOT_URL}/add_product`, {a:1})
-            .then(() => {
-                dispatch({
-                    type: ADD_PRODUCT,
-                    category,
-                    name,
-                    purchasePrice,
-                    price,
-                    productID: productID++
-                });
-                dispatch(closeProductModal());
-            })
-            .catch(err => {
-                console.log('err', err)
-            });
-    }
-};
-
-export const editProduct = (category, name, purchasePrice, price) => {
-    return function(dispatch) {
-        axios.post(`${ROOT_URL}/edit_product`, {a:1})
-            .then(() => {
-                dispatch({
-                    type: EDIT_PRODUCT,
-                    category,
-                    name,
-                    purchasePrice,
-                    price
-                });
-
-                dispatch(closeProductModal());
-            })
-            .catch(err => {
-                console.log('err', err)
-            });
-    }
-};
-
-export const removeProduct = () => {
-    return function(dispatch) {
-        axios.post(`${ROOT_URL}/remove_product`, {a:1})
-            .then(response => {
-                dispatch({
-                    type: REMOVE_PRODUCT
-                });
-
-                dispatch(closeDeleteModal());
-            })
-            .catch(err => {
-                console.log('err', err)
-            });
-    }
-};
-
-export const removeCategory = () => {
-    return function(dispatch) {
-        axios.post(`${ROOT_URL}/remove_category`, {a:1})
-            .then(response => {
-                dispatch({
-                    type: REMOVE_CATEGORY
-                });
-
-                dispatch(closeDeleteModal());
-            })
-            .catch(err => {
-                console.log('err', err)
-            });
-    }
-};
-
-let categoryID = 0;
-export const addCategory = (name) => {
-    return function(dispatch) {
-        axios.post(`${ROOT_URL}/add_category`, {a:1})
-            .then(response => {
-                console.log('fetch', response);
-                dispatch({
-                    type: ADD_CATEGORY,
-                    name,
-                    categoryID : categoryID++
-                });
-                dispatch(closeCategoryModal());
-            })
-            .catch(err => {
-                console.log('err', err)
-            });
-    }
-};
-
-export const fetchProducts = () => {
-    return function(dispatch) {
-        axios.post(`${ROOT_URL}/get_products`)
-            .then(response => {
-                dispatch({
-                    type: GET_PRODUCTS,
-                    products: response.data
-                });
-            })
-            .catch(err => {
-                console.log('err', err)
-            });
-    }
-};
-
-export const fetchCategories = () => {
-    return function(dispatch) {
-        axios.post(`${ROOT_URL}/get_categories`)
-            .then(response => {
-                dispatch({
-                    type: GET_CATEGORIES,
-                    categories: response.data
-                });
-            })
-            .catch(err => {
-                console.log('err', err)
-            });
     }
 };

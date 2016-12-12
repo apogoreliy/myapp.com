@@ -17,9 +17,17 @@ module.exports = {
         return new Promise(function(resolve, reject) {
             that.connection().then(function(db) {
                 const collection = db.collection('products');
-                collection.insertMany(product, function(err, items) {
-                    err ? reject(err) : resolve(items);
+                collection.find().sort({productID: -1}).limit(1).toArray(function(err, i) {
+                    if(err){ reject(err) }
+                    else{
+                        var productID = !i[0]['productID'] ? 0 : ++i[0]['productID'];
+                        collection.insert({name : product.name, productID: productID, purchasePrice : product.purchasePrice,
+                            price: product.price, categoryID: product.categoryID}, function(err) {
+                            err ? reject(err) : resolve(productID);
+                        });
+                    }
                 });
+
             });
         });
     },
@@ -29,8 +37,14 @@ module.exports = {
         return new Promise(function(resolve, reject) {
             that.connection().then(function(db) {
                 const collection = db.collection('categories');
-                collection.insertMany(category, function(err, items) {
-                    err ? reject(err) : resolve(items);
+                collection.find().sort({categoryID: -1}).limit(1).toArray(function(err, i) {
+                    if(err){ reject(err) }
+                    else{
+                        var categoryID = !i[0]['categoryID'] ? 0 : ++i[0]['categoryID'];
+                        collection.insert({name : category.name, categoryID: categoryID}, function(err) {
+                            err ? reject(err) : resolve(categoryID);
+                        });
+                    }
                 });
             });
         });
@@ -39,6 +53,7 @@ module.exports = {
     editProduct : function(product){
         // a:2 -> what we need to change
         // $set: {b:1} -> by what to change
+        console.log('prod', product);
         const that =this;
         return new Promise(function(resolve, reject) {
             that.connection().then(function(db) {
@@ -55,20 +70,20 @@ module.exports = {
         return new Promise(function(resolve, reject) {
             that.connection().then(function(db) {
                 const collection = db.collection('products');
-                collection.deleteOne(product, function(err, items) {
+                collection.deleteOne({productID : product.id}, function(err, items) {
                     err ? reject(err) : resolve(items);
                 });
             });
         });
     },
 
-    removeCategory: function(category){
+    removeCategory: function(id){
         const that =this;
         return new Promise(function(resolve, reject) {
             that.connection().then(function(db) {
                 const collection = db.collection('categories');
-                collection.deleteOne(category, function(err, items) {
-                    err ? reject(err) : resolve(items);
+                collection.deleteOne({categoryID : id}, function(err) {
+                    err ? reject(err) : resolve();
                 });
             });
         });

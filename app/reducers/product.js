@@ -11,7 +11,6 @@ import {
 } from '../actions/types';
 
 export default (state = {}, action) => {
-    let prod = state.products ? state.products : "";
 
     switch (action.type) {
         case OPEN_ADD_PRODUCT_MODAL:
@@ -40,15 +39,13 @@ export default (state = {}, action) => {
                 productID : null
             });
         case ADD_PRODUCT:
+            let prod = state.prods ? state.prods : "";
             return Object.assign({}, state, {
-                products : [...prod, action]
+                prods : [...prod, action]
             });
         case GET_PRODUCTS:
-            console.log('state', action);
-            console.log('acts', action);
-            return Object.assign({}, state, {
-                products : [...prod, action.products]
-            });
+            return Object.assign({}, state, action.products);
+
         case EDIT_PRODUCT:
             prod = state.products.map( p =>{
                 if(p.productID === state.productID){
@@ -62,11 +59,12 @@ export default (state = {}, action) => {
                 products : [...prod]
             });
         case REMOVE_PRODUCT:
-            let p = state.products.filter( f => {
+            let p = state.prods.filter( f => {
                 return f.productID !== state.productID;
             });
+
             return Object.assign({}, state, {
-                products : [...p]
+                prods : [...p]
             });
     }
     return state;

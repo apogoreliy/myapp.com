@@ -5,7 +5,7 @@ import Category from '../components/Category';
 
 const mapStateToProps = (state) => {
     return {
-        categories: state.category.categories
+        categories: state.category
     }
 };
 
