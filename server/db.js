@@ -80,7 +80,6 @@ module.exports = {
         return new Promise(function(resolve, reject) {
             const collection = db.collection('categories');
             collection.find({name: "Без категории"}).toArray(function (err, category) {
-                console.log('checkAndCreateWithoutCategory');
                 if(err) {
                     reject(err)
                 }
@@ -101,7 +100,6 @@ module.exports = {
                         });
                     }
                     else{
-                        console.log('exist without', category[0]['categoryID']);
                         resolve(category[0]['categoryID']);
                     }
                 }
@@ -112,10 +110,7 @@ module.exports = {
     getAndUpdateProductsByCategory : function(db, currentId, withoutCategoryId){
         return new Promise(function(resolve, reject) {
             const collection = db.collection('products');
-            console.log('getAndUpdateProductsByCategory', withoutCategoryId);
-
             collection.find({categoryID: parseInt(currentId)}).forEach(function (product) {
-                console.log('forEach', product);
                 collection.updateOne(
                     {productID: parseInt(product.productID)},
                     {$set: {categoryID: parseInt(withoutCategoryId)}},
@@ -124,7 +119,6 @@ module.exports = {
                             reject(err)
                         }
                         else{
-                            console.log('getAndUpdateProductsByCategory', withoutCategoryId);
                             resolve()
                         }
                 });
@@ -149,9 +143,7 @@ module.exports = {
     removeWithoutCategory: function(db, id){
         const that =this;
         return new Promise(function(resolve, reject) {
-            console.log('removeWithoutCategory');
             db.collection('products').remove({categoryID: parseInt(id)}, function (err) {
-                console.log('removeWithoutCategory', withoutCategoryId);
                 err ? reject(err) : resolve();
             });
         });
@@ -159,9 +151,7 @@ module.exports = {
 
     removeCategory : function(id, db){
         return new Promise(function(resolve, reject) {
-            console.log('removeCategory');
             db.collection('categories').deleteOne({categoryID: parseInt(id)}, function (err) {
-                console.log('removeCategory', id);
                 if(err){
                     reject(err)
                 } else{
@@ -174,29 +164,16 @@ module.exports = {
     handleCategory: function(id){
         const that =this;
         return new Promise(function(resolve, reject) {
-            console.log('id', id);
             that.connection().then(function (db) {
-                if(id === categoryID){
-                    console.log('remove without');
-                    that.removeWithoutCategory(db, id).then(function () {
-                        console.log('test');
-                    });
-                }
-                that.removeCategory(id, db).then(function () {
-                    console.log('test remove');
-                });
-
                 that.checkAndCreateWithoutCategory(db).then(function(categoryID){
                     that.getAndUpdateProductsByCategory(db, id, categoryID).then(function () {
-                        /*
                         if(id === categoryID){
-                            console.log('remove without');
-                            that.removeWithoutCategory(db, id);
+                            that.removeWithoutCategory(db, id).then(function () {
+                            });
                         }
-                        that.removeCategory(id, db);
-                        */
+                        that.removeCategory(id, db).then(function () {
+                        });
                         that.getCategoriesAndProducts().then(function(obj){
-                            console.log('obj', obj);
                             resolve(obj);
                         });
                     });

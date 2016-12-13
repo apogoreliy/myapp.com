@@ -1,33 +1,51 @@
-import React from 'react';
+import React, {Component} from 'react';
 import { connect } from 'react-redux'
 import { closeDeleteModal, removeCategory, removeProduct } from '../actions'
 
-const DeleteModal = ({dispatch ,confirm, close, headerTitle, bodyText, mode, id}) => (
-    <div>
-        <div style={{display: confirm ? "block" : "none"}} className="modal in" role="dialog"
-             aria-labelledby="modal-label">
-            <div className="modal-dialog" role="document">
-                <div className="modal-content">
-                    <button type="button" onClick={()=>dispatch(closeDeleteModal())}
-                            className="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                    <h4 className="modal-title" style={{textAlign: "center"}}>{mode ? headerTitle : headerTitle+' ID-'+id}</h4>
-                    <div style={{textAlign: "center"}}> {bodyText}</div>
+class DeleteModal extends Component {
+    constructor(props) {
+        super(props);
+
+        this.cancelClick = this.cancelClick.bind(this);
+        this.handleClickBtn = this.handleClickBtn.bind(this);
+    }
+
+    cancelClick() {
+        this.props.dispatch(closeDeleteModal())
+    }
+
+    handleClickBtn() {
+        this.props.mode ? this.props.dispatch(removeCategory(this.props.id)) : this.props.dispatch(removeProduct(this.props.id))
+    }
+
+    render() {
+        return (<div>
+                <div style={{display: this.props.confirm ? "block" : "none"}} className="modal in" role="dialog"
+                     aria-labelledby="modal-label">
+                    <div className="modal-dialog" role="document">
+                        <div className="modal-content">
+                            <button type="button" onClick={this.cancelClick} className="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                            <h4 className="modal-title text-holder">{this.props.mode ? this.props.headerTitle : this.props.headerTitle + ' ID-' + this.props.id + ' ?'}</h4>
+                            <div className="text-holder"> {this.props.bodyText}</div>
+                            <div className="modal-footer">
+                                <button type="button" className="btn btn-primary" onClick={this.handleClickBtn}>
+                                    Удалить
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div className="modal-footer">
-                    <button type="button" className="btn btn-primary"
-                            onClick={() => dispatch(mode ? removeCategory(id) : removeProduct(id))}>
-                        Удалить
-                    </button>
-                </div>
+                <div style={{display: this.props.confirm ? "block" : "none"}} className="modal-backdrop in"></div>
             </div>
-        </div>
-        <div style={{display: confirm ? "block" : "none"}} className="modal-backdrop in"></div>
-    </div>
-);
+        )
+    }
+}
+
 
 const mapStateToProps = (state) => {
+    console.log(state);
     return {
         id : state.category.openDeleteCategoryModal ? state.category.categoryID : state.product.productID,
         mode : state.category.openDeleteCategoryModal,

@@ -31,7 +31,7 @@ export default (state = {}, action) => {
         case CLOSE_DELETE_MODAL:
             return Object.assign({}, state, {
                 openDeleteCategoryModal : action.openDeleteCategoryModal,
-                categoryID : null
+                categoryID : action.categoryID
             });
 
         case SELECT_CATEGORY:

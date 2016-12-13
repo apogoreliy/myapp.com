@@ -16,17 +16,16 @@ import {
     GET_PRODUCTS,
     GET_CATEGORIES
 } from './types';
-import axios from 'axios';
-//const ROOT_URL = process.env.PORT || 3000;
-//const ROOT_URL = 'http://localhost:3000';
-const ROOT_URL = 'https://warm-garden-46587.herokuapp.com';
+import utils from '../utils/index';
 
 //general actions
 export const closeDeleteModal = () => {
     return {
         type: CLOSE_DELETE_MODAL,
         openDeleteCategoryModal : false,
-        openDeleteProductModal : false
+        openDeleteProductModal : false,
+        productID : null,
+        categoryID : null
     }
 };
 
@@ -50,71 +49,56 @@ export const openDeleteProductModal = (id) => {
 export const addProduct = (categoryID, name, purchasePrice, price) => {
     return function(dispatch) {
         dispatch(closeProductModal());
-        axios.post(`${ROOT_URL}/add_product`, {categoryID, name, purchasePrice, price})
-            .then((response) => {
-                dispatch({
-                    type: ADD_PRODUCT,
-                    categoryID,
-                    name,
-                    purchasePrice,
-                    price,
-                    productID: response.data.productID
-                });
-            })
-            .catch(err => {
-                console.log('err', err)
+
+        utils.addProduct(categoryID, name, purchasePrice, price, function(response){
+            dispatch({
+                type: ADD_PRODUCT,
+                categoryID,
+                name,
+                purchasePrice,
+                price,
+                productID: response.data.productID
             });
+        });
     }
 };
 
 export const editProduct = (productID, categoryID, name, purchasePrice, price) => {
     return function(dispatch) {
-        axios.post(`${ROOT_URL}/edit_product`, {productID, categoryID, name, purchasePrice, price})
-            .then(() => {
-                dispatch({
-                    type: EDIT_PRODUCT,
-                    categoryID,
-                    name,
-                    purchasePrice,
-                    price
-                });
+        dispatch(closeProductModal());
+        dispatch({
+            type: EDIT_PRODUCT,
+            categoryID,
+            name,
+            purchasePrice,
+            price,
+            productID
+        });
 
-                dispatch(closeProductModal());
-            })
-            .catch(err => {
-                console.log('err', err)
-            });
+        utils.editProduct(productID, categoryID, name, purchasePrice, price);
     }
 };
 
 export const removeProduct = (id) => {
     return function(dispatch) {
         dispatch(closeDeleteModal());
-        axios.post(`${ROOT_URL}/remove_product`, {id})
-            .then(() => {
-                dispatch({
-                    type: REMOVE_PRODUCT,
-                    productID : id
-                });
-            })
-            .catch(err => {
-                console.log('err', err)
-            });
+        dispatch({
+            type: REMOVE_PRODUCT,
+            productID : id
+        });
+
+        utils.removeProduct(id);
     }
 };
 
 export const fetchProducts = () => {
     return function(dispatch) {
-        axios.get(`${ROOT_URL}/get_products`)
-            .then(response => {
-                dispatch({
-                    type: GET_PRODUCTS,
-                    products: {prods :response.data}
-                });
-            })
-            .catch(err => {
-                console.log('err', err)
+        utils.fetchProducts(function(response){
+            dispatch({
+                type: GET_PRODUCTS,
+                products: {prods :response.data}
             });
+        });
     }
 };
 
@@ -138,53 +122,42 @@ export const closeProductModal = () => {
 export const removeCategory = (id) => {
     return function(dispatch) {
         dispatch(closeDeleteModal());
-        axios.post(`${ROOT_URL}/remove_category`, {id})
-            .then((response) => {
-                dispatch({
-                    type: REMOVE_CATEGORY,
-                    categories: {cats : response.data.cats}
-                });
-
-                dispatch({
-                    type: GET_PRODUCTS,
-                    products: {prods : response.data.prods}
-                });
-            })
-            .catch(err => {
-                console.log('err', err)
+        utils.removeCategory(id, function(response){
+            dispatch({
+                type: REMOVE_CATEGORY,
+                categories: {cats : response.data.cats}
             });
+
+            dispatch({
+                type: GET_PRODUCTS,
+                products: {prods : response.data.prods}
+            });
+        });
     }
 };
 
 export const addCategory = (name) => {
     return function(dispatch) {
         dispatch(closeCategoryModal());
-        axios.post(`${ROOT_URL}/add_category`, {name})
-            .then(response => {
-                dispatch({
-                    type: ADD_CATEGORY,
-                    name,
-                    categoryID : response.data.categoryID
-                });
-            })
-            .catch(err => {
-                console.log('err', err)
+
+        utils.addCategory(name, function (response) {
+            dispatch({
+                type: ADD_CATEGORY,
+                name,
+                categoryID : response.data.categoryID
             });
+        });
     }
 };
 
 export const fetchCategories = () => {
     return function(dispatch) {
-        axios.get(`${ROOT_URL}/get_categories`)
-            .then(response => {
-                dispatch({
-                    type: GET_CATEGORIES,
-                    categories: {cats : response.data}
-                });
-            })
-            .catch(err => {
-                console.log('err', err)
+        utils.fetchCategories(function(response){
+            dispatch({
+                type: GET_CATEGORIES,
+                categories: {cats : response.data}
             });
+        });
     }
 };
 

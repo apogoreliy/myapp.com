@@ -40,9 +40,7 @@ class ProductModal extends Component{
     }
 
     resetState(){
-        this.setState({
-            name:"", purchasePrice: "", price : "", categoryID : 0
-        })
+        this.setState({name:"", purchasePrice: "", price : "", categoryID : 0 })
     }
 
     cancelClick () {
@@ -51,9 +49,7 @@ class ProductModal extends Component{
     }
 
     handleClickBtn(){
-        if (
-            !this.state.name.trim() || !this.state.purchasePrice || parseInt(this.state.purchasePrice) === 0 || !this.state.price || parseInt(this.state.price) === 0
-        ) return;
+        if (!this.state.name.trim() || 0 > this.state.categoryID || !this.state.purchasePrice || !this.state.price) return;
 
         this.props.mode ?
             this.props.dispatch(addProduct(this.state.categoryID, this.state.name, this.state.purchasePrice, this.state.price)) :
@@ -90,7 +86,6 @@ class ProductModal extends Component{
                             <h4 className="modal-title">{this.props.headerTitle}</h4>
                             <div className="modal-body">
                                 <select className="form-control"
-                                        style={{marginTop: "15px"}}
                                     onChange={this.handleChangeCategory}
                                         name="categoryID"
                                         value={this.state.categoryID}>
@@ -100,7 +95,6 @@ class ProductModal extends Component{
                                        className="form-control"
                                        onChange={this.handleChangeName}
                                        placeholder="Название"
-                                       style={{marginTop: "15px"}}
                                        name="name"
                                        value={this.state.name}
                                 />
@@ -108,7 +102,6 @@ class ProductModal extends Component{
                                        className="form-control"
                                        onChange={this.handleChangePurchasePrice}
                                        placeholder="Закупочная стоимость"
-                                       style={{marginTop: "15px"}}
                                        name="purchasePrice"
                                        value={this.state.purchasePrice}
                                 />
@@ -116,17 +109,16 @@ class ProductModal extends Component{
                                        className="form-control"
                                        onChange={this.handleChangePrice}
                                        placeholder="Розничная цена"
-                                       style={{marginTop: "15px"}}
                                        name="price"
                                        value={this.state.price}
                                 />
                             </div>
-                        </div>
-                        <div className="modal-footer">
-                            <button type="button" className="btn btn-primary"
-                                    onClick={this.handleClickBtn}>
-                                Сохранить
-                            </button>
+                            <div className="modal-footer">
+                                <button type="button" className="btn btn-primary"
+                                        onClick={this.handleClickBtn}>
+                                    Сохранить
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>

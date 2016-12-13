@@ -4,6 +4,7 @@
   "description": "Simple react app",
   "main": "index.js",
   "scripts": {
+    "test" : "karma start",
     "start": "node ./server/server.js"
   },
   "author": "Andrey Pogoreliy",

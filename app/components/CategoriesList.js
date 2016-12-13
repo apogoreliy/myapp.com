@@ -16,8 +16,8 @@ class CategoriesList extends Component{
             if( this.props.categories.cats.hasOwnProperty( i ) ) {
                 let obj = this.props.categories.cats[i];
                 arr.push (
-                    <div key={'category'+obj.categoryID} style={{marginTop: "10px"}}>
-                        <span className="btn btn-default" onClick={e => this.props.handleClick(obj.categoryID)} style={{marginRight: "10px"}}>X</span>
+                    <div key={'category'+obj.categoryID} className="category-item">
+                        <span className="btn btn-default" onClick={e => this.props.handleClick(obj.categoryID)} >X</span>
                         <a onClick={e => { e.preventDefault(); this.props.selectCategory(obj.categoryID)}}> {obj.name} </a>
                     </div>
                 );

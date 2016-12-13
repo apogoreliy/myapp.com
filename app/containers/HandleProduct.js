@@ -6,7 +6,11 @@ import ProductList from '../components/ProductList';
 const mapStateToProps = (state) => {
     return {
         products: state.product.prods ? state.product.prods.filter( p => {
-            return parseInt(p.categoryID) === (state.category.selectedCategory ? state.category.selectedCategory : 0)
+            return parseInt(p.categoryID) === (
+                state.category.selectedCategory ?
+                    state.category.selectedCategory :
+                    (state.product.prods ? state.product.prods[0]['categoryID'] : 0)
+                )
         }) : null
     }
 };

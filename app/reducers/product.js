@@ -36,7 +36,7 @@ export default (state = {}, action) => {
         case CLOSE_DELETE_MODAL:
             return Object.assign({}, state, {
                 openDeleteProductModal : action.openDeleteProductModal,
-                productID : null
+                productID : action.productID
             });
         case ADD_PRODUCT:
             let prod = state.prods ? state.prods : "";
@@ -48,7 +48,7 @@ export default (state = {}, action) => {
 
         case EDIT_PRODUCT:
             prod = state.prods.map( p =>{
-                if(p.productID === state.productID){
+                if(p.productID === action.productID){
                     let pr = action;
                     pr.productID = p.productID;
                     return pr;
