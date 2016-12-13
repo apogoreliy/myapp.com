@@ -45,7 +45,6 @@ class DeleteModal extends Component {
 
 
 const mapStateToProps = (state) => {
-    console.log(state);
     return {
         id : state.category.openDeleteCategoryModal ? state.category.categoryID : state.product.productID,
         mode : state.category.openDeleteCategoryModal,

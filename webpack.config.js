@@ -9,10 +9,11 @@ module.exports = {
   resolve: {
     root: __dirname,
     modulesDirectories: [
-      'node_modules',
-      './app/components'
+        'node_modules',
+        './app/components',
+        './app/containers'
     ],
-    extensions: ['', '.js']
+    extensions: ['', '.js', '.jsx']
   },
   module: {
     loaders: [
@@ -21,7 +22,7 @@ module.exports = {
         query: {
           presets: ['react', 'es2015', 'stage-0']
         },
-        test: /\.jsx?$/,
+        test: /\.js?$/,
         exclude: /(node_modules|bower_components)/
       }
     ]
