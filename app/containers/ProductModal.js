@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
 import { connect } from 'react-redux'
 import { closeProductModal, addProduct, editProduct } from '../actions'
 
@@ -128,11 +128,26 @@ class ProductModal extends Component{
     }
 }
 
+ProductModal.propTypes = {
+    productID : PropTypes.number,
+    mode : PropTypes.bool,
+    product : PropTypes.array,
+    categories : PropTypes.oneOfType([
+        PropTypes.array,
+        PropTypes.object
+    ]),
+    selectedCategory : PropTypes.number,
+    confirm : PropTypes.bool,
+    headerTitle : PropTypes.string
+};
+
 const mapStateToProps = (state) => {
     return {
         productID : state.product.productID,
         mode : state.product.openAddProductModal,
-        product: state.product.openEditProductModal ? state.product.prods.filter( p =>{return p.productID === state.product.productID}) : null,
+        product: state.product.openEditProductModal ?
+            state.product.prods.filter( p => { return p.productID === state.product.productID } ) :
+            null,
         categories : state.category.cats,
         selectedCategory : state.category.selectedCategory,
         confirm : state.product.openAddProductModal || state.product.openEditProductModal,

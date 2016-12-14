@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
 import { connect } from 'react-redux'
 import { closeDeleteModal, removeCategory, removeProduct } from '../actions'
 
@@ -45,11 +45,11 @@ class DeleteModal extends Component {
 }
 
 DeleteModal.propTypes = {
-    id: React.PropTypes.number,
-    mode: React.PropTypes.bool,
-    confirm: React.PropTypes.bool,
-    headerTitle : React.PropTypes.string,
-    bodyText : React.PropTypes.string,
+    id: PropTypes.number,
+    mode: PropTypes.bool,
+    confirm: PropTypes.bool,
+    headerTitle : PropTypes.string,
+    bodyText : PropTypes.string,
 };
 
 const mapStateToProps = (state) => {

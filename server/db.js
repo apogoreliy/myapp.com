@@ -110,19 +110,23 @@ module.exports = {
     getAndUpdateProductsByCategory : function(db, currentId, withoutCategoryId){
         return new Promise(function(resolve, reject) {
             const collection = db.collection('products');
-            collection.find({categoryID: parseInt(currentId)}).forEach(function (product) {
-                collection.updateOne(
-                    {productID: parseInt(product.productID)},
-                    {$set: {categoryID: parseInt(withoutCategoryId)}},
-                    function (err) {
-                        if(err){
-                            reject(err)
+            const cursor = collection.find({categoryID: parseInt(currentId)});
+
+            cursor.forEach(
+                function (product) {
+                    collection.updateOne(
+                        {productID: parseInt(product.productID)},
+                        {$set: {categoryID: parseInt(withoutCategoryId)}},
+                        function (err) {
+                            if (err) { reject(err) }
+                            else { resolve() }
                         }
-                        else{
-                            resolve()
-                        }
-                });
-            });
+                    );
+                },
+                function(){
+                    resolve();
+                }
+            );
         });
     },
 
@@ -187,7 +191,7 @@ module.exports = {
         return new Promise(function(resolve, reject) {
             that.connection().then(function(db) {
                 const collection = db.collection('products');
-                collection.find().toArray(function(err, items) {
+                collection.find({},{_id: 0}).toArray(function(err, items) {
                     err ? reject(err) : resolve(items);
                 });
             });
@@ -199,7 +203,7 @@ module.exports = {
         return new Promise(function(resolve, reject) {
             that.connection().then(function(db) {
                 const collection = db.collection('categories');
-                collection.find().toArray(function(err, items) {
+                collection.find({},{_id: 0}).toArray(function(err, items) {
                     err ? reject(err) : resolve(items);
                 });
             });

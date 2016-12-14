@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
 import { connect } from 'react-redux'
 import { closeCategoryModal, addCategory } from '../actions'
 
@@ -57,6 +57,13 @@ class CategoryModal extends Component{
         );
     }
 }
+
+CategoryModal.propTypes = {
+    confirm : PropTypes.bool,
+    headerTitle: PropTypes.string.isRequired,
+    close : PropTypes.func.isRequired,
+    handleClick : PropTypes.func.isRequired
+};
 
 const mapStateToProps = (state) => {
     return {

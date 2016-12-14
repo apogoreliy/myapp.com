@@ -23186,7 +23186,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	exports.default = function (_ref) {
+	var Header = function Header(_ref) {
 	    var addProduct = _ref.addProduct,
 	        addCategory = _ref.addCategory;
 	    return _react2.default.createElement(
@@ -23213,6 +23213,13 @@
 	        )
 	    );
 	};
+
+	Header.propTypes = {
+	    addProduct: _react.PropTypes.func.isRequired,
+	    addCategory: _react.PropTypes.func.isRequired
+	};
+
+	exports.default = Header;
 
 /***/ },
 /* 217 */
@@ -23418,8 +23425,8 @@
 	}(_react.Component);
 
 	ProductList.propTypes = {
-	    products: _react2.default.PropTypes.array,
-	    openDeleteProductModal: _react2.default.PropTypes.bool
+	    products: _react.PropTypes.array,
+	    openDeleteProductModal: _react.PropTypes.bool
 	};
 
 	exports.default = ProductList;
@@ -23440,7 +23447,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	exports.default = function (props) {
+	var Product = function Product(props) {
 	    return _react2.default.createElement(
 	        "tr",
 	        null,
@@ -23484,6 +23491,19 @@
 	        )
 	    );
 	};
+
+	Product.propTypes = {
+	    props: _react.PropTypes.shape({
+	        id: _react.PropTypes.number,
+	        name: _react.PropTypes.string,
+	        purchasePrice: _react.PropTypes.string,
+	        price: _react.PropTypes.string,
+	        remove: _react.PropTypes.func,
+	        edit: _react.PropTypes.func
+	    })
+	};
+
+	exports.default = Product;
 
 /***/ },
 /* 221 */
@@ -23684,6 +23704,16 @@
 	    return ProductModal;
 	}(_react.Component);
 
+	ProductModal.propTypes = {
+	    productID: _react.PropTypes.number,
+	    mode: _react.PropTypes.bool,
+	    product: _react.PropTypes.array,
+	    categories: _react.PropTypes.oneOfType([_react.PropTypes.array, _react.PropTypes.object]),
+	    selectedCategory: _react.PropTypes.number,
+	    confirm: _react.PropTypes.bool,
+	    headerTitle: _react.PropTypes.string
+	};
+
 	var mapStateToProps = function mapStateToProps(state) {
 	    return {
 	        productID: state.product.productID,
@@ -23808,11 +23838,11 @@
 	}(_react.Component);
 
 	DeleteModal.propTypes = {
-	    id: _react2.default.PropTypes.number,
-	    mode: _react2.default.PropTypes.bool,
-	    confirm: _react2.default.PropTypes.bool,
-	    headerTitle: _react2.default.PropTypes.string,
-	    bodyText: _react2.default.PropTypes.string
+	    id: _react.PropTypes.number,
+	    mode: _react.PropTypes.bool,
+	    confirm: _react.PropTypes.bool,
+	    headerTitle: _react.PropTypes.string,
+	    bodyText: _react.PropTypes.string
 	};
 
 	var mapStateToProps = function mapStateToProps(state) {
@@ -24101,6 +24131,13 @@
 
 	    return CategoryModal;
 	}(_react.Component);
+
+	CategoryModal.propTypes = {
+	    confirm: _react.PropTypes.bool,
+	    headerTitle: _react.PropTypes.string.isRequired,
+	    close: _react.PropTypes.func.isRequired,
+	    handleClick: _react.PropTypes.func.isRequired
+	};
 
 	var mapStateToProps = function mapStateToProps(state) {
 	    return {

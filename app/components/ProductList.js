@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
 import Product from './Product'
 import ProductModal from '../containers/ProductModal';
 import DeleteModal from '../containers/DeleteModal';
@@ -51,8 +51,8 @@ class ProductList extends Component {
 }
 
 ProductList.propTypes = {
-    products: React.PropTypes.array,
-    openDeleteProductModal : React.PropTypes.bool
+    products: PropTypes.array,
+    openDeleteProductModal : PropTypes.bool
 };
 
 export default ProductList;

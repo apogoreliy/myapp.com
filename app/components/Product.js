@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 
-export default (props) => (
+const Product = (props) => (
     <tr>
         <td>{props.id}</td>
         <td>{props.name}</td>
@@ -18,3 +18,16 @@ export default (props) => (
         </td>
     </tr>
 );
+
+Product.propTypes = {
+    props: PropTypes.shape({
+        id : PropTypes.number,
+        name : PropTypes.string,
+        purchasePrice : PropTypes.string,
+        price : PropTypes.string,
+        remove : PropTypes.func,
+        edit : PropTypes.func
+    })
+};
+
+export default Product;
