@@ -3,7 +3,7 @@ import HandleProduct from '../containers/HandleProduct';
 import HandleCategory from '../containers/HandleCategory'
 
 export default () => (
-    <div className="">
+    <div>
         <HandleCategory />
         <HandleProduct />
     </div>
