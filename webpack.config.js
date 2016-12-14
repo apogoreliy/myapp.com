@@ -1,31 +1,26 @@
 module.exports = {
-  entry: [
-    './app/app.js'
-  ],
-  output: {
-    path: __dirname,
-    filename: './public/bundle.js'
-  },
-  resolve: {
-    root: __dirname,
-    modulesDirectories: [
-        'node_modules',
-        './app/components',
-        './app/containers'
+    entry: [
+        './app/app.js'
     ],
-    extensions: ['', '.js', '.jsx']
-  },
-  module: {
-    loaders: [
-      {
-        loader: 'babel-loader',
-        query: {
-          presets: ['react', 'es2015', 'stage-0']
-        },
-        test: /\.js?$/,
-        exclude: /(node_modules|bower_components)/
-      }
-    ]
-  },
-  devtool: 'cheap-module-eval-source-map'
+    output: {
+        path: __dirname,
+        publicPath: '/',
+        filename: './public/bundle.js'
+    },
+    module: {
+        loaders: [{
+            exclude: /node_modules/,
+            loader: 'babel',
+            query: {
+                presets: ['react', 'es2015', 'stage-1']
+            }
+        }]
+    },
+    resolve: {
+        extensions: ['', '.js', '.jsx']
+    },
+    devServer: {
+        historyApiFallback: true,
+        contentBase: './'
+    }
 };
