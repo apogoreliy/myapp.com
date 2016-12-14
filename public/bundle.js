@@ -22021,8 +22021,8 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	//const ROOT_URL = process.env.PORT || 3000;
-	var ROOT_URL = 'http://localhost:3000';
-	//const ROOT_URL = 'https://warm-garden-46587.herokuapp.com';
+	//const ROOT_URL = 'http://localhost:3000';
+	var ROOT_URL = 'https://warm-garden-46587.herokuapp.com';
 
 	module.exports = {
 	    editProduct: function editProduct(productID, categoryID, name, purchasePrice, price) {
