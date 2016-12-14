@@ -6,6 +6,7 @@ import CategoriesList from '../components/CategoriesList';
 const mapStateToProps = (state) => {
     return {
         categories: state.category,
+        selectedCategory : state.category.selectedCategory || (state.product.prods ? state.product.prods[0]['categoryID'] : 0),
         openDeleteCategoryModal : state.category.openDeleteCategoryModal
     }
 };

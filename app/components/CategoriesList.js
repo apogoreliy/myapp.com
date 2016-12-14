@@ -19,7 +19,7 @@ class CategoriesList extends Component{
                 arr.push (
                     <div key={'category'+obj.categoryID} className="category-item">
                         <span className="btn btn-default" onClick={e => this.props.handleClick(obj.categoryID)} >X</span>
-                        <a onClick={e => { e.preventDefault(); this.props.selectCategory(obj.categoryID)}}> {obj.name} </a>
+                        <a className={this.props.selectedCategory === obj.categoryID && "active"} onClick={e => { e.preventDefault(); this.props.selectCategory(obj.categoryID)}}> {obj.name} </a>
                     </div>
                 );
             }
@@ -45,7 +45,8 @@ CategoriesList.propTypes = {
     fetchCategories: React.PropTypes.func.isRequired,
     handleClick: React.PropTypes.func.isRequired,
     selectCategory: React.PropTypes.func.isRequired,
-    openDeleteCategoryModal : React.PropTypes.bool
+    openDeleteCategoryModal : React.PropTypes.bool,
+    selectedCategory : PropTypes.number
 };
 
 export default CategoriesList;

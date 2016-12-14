@@ -22021,8 +22021,8 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	//const ROOT_URL = process.env.PORT || 3000;
-	//const ROOT_URL = 'http://localhost:3000';
-	var ROOT_URL = 'https://warm-garden-46587.herokuapp.com';
+	var ROOT_URL = 'http://localhost:3000';
+	//const ROOT_URL = 'https://warm-garden-46587.herokuapp.com';
 
 	module.exports = {
 	    editProduct: function editProduct(productID, categoryID, name, purchasePrice, price) {
@@ -23281,7 +23281,7 @@
 	var mapStateToProps = function mapStateToProps(state) {
 	    return {
 	        products: state.product.prods ? state.product.prods.filter(function (p) {
-	            return parseInt(p.categoryID) === (state.category.selectedCategory ? state.category.selectedCategory : state.product.prods ? state.product.prods[0]['categoryID'] : 0);
+	            return parseInt(p.categoryID) === (state.category.selectedCategory || (state.product.prods ? state.product.prods[0]['categoryID'] : 0));
 	        }) : null,
 	        openDeleteProductModal: state.product.openDeleteProductModal
 	    };
@@ -23884,6 +23884,7 @@
 	var mapStateToProps = function mapStateToProps(state) {
 	    return {
 	        categories: state.category,
+	        selectedCategory: state.category.selectedCategory || (state.product.prods ? state.product.prods[0]['categoryID'] : 0),
 	        openDeleteCategoryModal: state.category.openDeleteCategoryModal
 	    };
 	};
@@ -23972,7 +23973,7 @@
 	                            ),
 	                            _react2.default.createElement(
 	                                'a',
-	                                { onClick: function onClick(e) {
+	                                { className: _this2.props.selectedCategory === obj.categoryID && "active", onClick: function onClick(e) {
 	                                        e.preventDefault();_this2.props.selectCategory(obj.categoryID);
 	                                    } },
 	                                ' ',
@@ -24008,7 +24009,8 @@
 	    fetchCategories: _react2.default.PropTypes.func.isRequired,
 	    handleClick: _react2.default.PropTypes.func.isRequired,
 	    selectCategory: _react2.default.PropTypes.func.isRequired,
-	    openDeleteCategoryModal: _react2.default.PropTypes.bool
+	    openDeleteCategoryModal: _react2.default.PropTypes.bool,
+	    selectedCategory: _react.PropTypes.number
 	};
 
 	exports.default = CategoriesList;
