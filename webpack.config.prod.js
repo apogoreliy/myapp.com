@@ -1,5 +1,3 @@
-// For info about this file refer to webpack and webpack-hot-middleware documentation
-// For info on how we're generating bundles with hashed filenames for cache busting: https://medium.com/@okonetchnikov/long-term-caching-of-static-assets-with-webpack-1ecb139adb95#.w99i89nsz
 var webpack = require ('webpack');
 var ExtractTextPlugin = require ( 'extract-text-webpack-plugin');
 var HtmlWebpackPlugin = require ( 'html-webpack-plugin');
@@ -16,7 +14,9 @@ module.exports = {
     },
     debug: true,
     noInfo: true,
-    entry: path.resolve(__dirname, 'app/app'),
+    entry: [
+        './app/app.js'
+    ],
     target: 'web',
     output: {
         path: __dirname,
@@ -25,7 +25,7 @@ module.exports = {
     },
     plugins: [
         new webpack.optimize.OccurenceOrderPlugin(),
-        new ExtractTextPlugin('styles.css'),
+        new ExtractTextPlugin('./dist/styles.css'),
         new HtmlWebpackPlugin({
             template: 'app/app.js',
             minify: {
