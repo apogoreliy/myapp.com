@@ -19,7 +19,8 @@ class DeleteModal extends Component {
     }
 
     render() {
-        return (<div>
+        return (
+            <div>
                 <div style={{display: this.props.confirm ? "block" : "none"}} className="modal in" role="dialog"
                      aria-labelledby="modal-label">
                     <div className="modal-dialog" role="document">

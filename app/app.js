@@ -6,6 +6,9 @@ import reduxThunk from 'redux-thunk'
 import rootReducer from './reducers';
 import App from './components/App';
 
+require("../styles/bootstrap.min.css");
+require("../styles/style.css");
+
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
 const store = createStoreWithMiddleware(rootReducer);
 
