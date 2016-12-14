@@ -21771,10 +21771,6 @@
 
 	var _Body2 = _interopRequireDefault(_Body);
 
-	var _DeleteModal = __webpack_require__(225);
-
-	var _DeleteModal2 = _interopRequireDefault(_DeleteModal);
-
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = function () {
@@ -21782,8 +21778,7 @@
 	        'div',
 	        { className: 'container' },
 	        _react2.default.createElement(_HandleHeader2.default, null),
-	        _react2.default.createElement(_Body2.default, null),
-	        _react2.default.createElement(_DeleteModal2.default, null)
+	        _react2.default.createElement(_Body2.default, null)
 	    );
 	};
 
@@ -23208,7 +23203,7 @@
 	        ),
 	        _react2.default.createElement(
 	            "button",
-	            { type: "button", className: "btn btn-default", onClick: function onClick() {
+	            { type: "button", className: "btn btn-default category-btn", onClick: function onClick() {
 	                    addCategory();
 	                } },
 	            "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u043A\u0430\u0442\u0435\u0433\u043E\u0440\u0438\u044E"
@@ -23243,7 +23238,7 @@
 	exports.default = function () {
 	    return _react2.default.createElement(
 	        'div',
-	        { className: '' },
+	        null,
 	        _react2.default.createElement(_HandleCategory2.default, null),
 	        _react2.default.createElement(_HandleProduct2.default, null)
 	    );
@@ -23277,7 +23272,8 @@
 	    return {
 	        products: state.product.prods ? state.product.prods.filter(function (p) {
 	            return parseInt(p.categoryID) === (state.category.selectedCategory ? state.category.selectedCategory : state.product.prods ? state.product.prods[0]['categoryID'] : 0);
-	        }) : null
+	        }) : null,
+	        openDeleteProductModal: state.product.openDeleteProductModal
 	    };
 	};
 
@@ -23320,6 +23316,10 @@
 	var _ProductModal = __webpack_require__(221);
 
 	var _ProductModal2 = _interopRequireDefault(_ProductModal);
+
+	var _DeleteModal = __webpack_require__(225);
+
+	var _DeleteModal2 = _interopRequireDefault(_DeleteModal);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -23405,13 +23405,19 @@
 	                        this.props.products && this.renderProducts()
 	                    )
 	                ),
-	                _react2.default.createElement(_ProductModal2.default, null)
+	                _react2.default.createElement(_ProductModal2.default, null),
+	                this.props.openDeleteProductModal && _react2.default.createElement(_DeleteModal2.default, null)
 	            );
 	        }
 	    }]);
 
 	    return ProductList;
 	}(_react.Component);
+
+	ProductList.propTypes = {
+	    products: _react2.default.PropTypes.array,
+	    openDeleteProductModal: _react2.default.PropTypes.bool
+	};
 
 	exports.default = ProductList;
 
@@ -23717,7 +23723,8 @@
 
 	var mapStateToProps = function mapStateToProps(state) {
 	    return {
-	        categories: state.category
+	        categories: state.category,
+	        openDeleteCategoryModal: state.category.openDeleteCategoryModal
 	    };
 	};
 
@@ -23756,6 +23763,10 @@
 	var _CategoryModal = __webpack_require__(224);
 
 	var _CategoryModal2 = _interopRequireDefault(_CategoryModal);
+
+	var _DeleteModal = __webpack_require__(225);
+
+	var _DeleteModal2 = _interopRequireDefault(_DeleteModal);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -23821,13 +23832,24 @@
 	                'div',
 	                { className: 'col-md-3' },
 	                this.props.categories && this.renderCategories(),
-	                _react2.default.createElement(_CategoryModal2.default, null)
+	                this.props.categories && _react2.default.createElement(_CategoryModal2.default, null),
+	                this.props.openDeleteCategoryModal && _react2.default.createElement(_DeleteModal2.default, null)
 	            );
 	        }
 	    }]);
 
 	    return CategoriesList;
 	}(_react.Component);
+
+	CategoriesList.propTypes = {
+	    categories: _react2.default.PropTypes.shape({
+	        cats: _react2.default.PropTypes.array
+	    }),
+	    fetchCategories: _react2.default.PropTypes.func.isRequired,
+	    handleClick: _react2.default.PropTypes.func.isRequired,
+	    selectCategory: _react2.default.PropTypes.func.isRequired,
+	    openDeleteCategoryModal: _react2.default.PropTypes.bool
+	};
 
 	exports.default = CategoriesList;
 
@@ -24076,6 +24098,14 @@
 
 	    return DeleteModal;
 	}(_react.Component);
+
+	DeleteModal.propTypes = {
+	    id: _react2.default.PropTypes.number,
+	    mode: _react2.default.PropTypes.bool,
+	    confirm: _react2.default.PropTypes.bool,
+	    headerTitle: _react2.default.PropTypes.string,
+	    bodyText: _react2.default.PropTypes.string
+	};
 
 	var mapStateToProps = function mapStateToProps(state) {
 	    return {

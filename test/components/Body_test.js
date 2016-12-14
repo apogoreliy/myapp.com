@@ -1,8 +1,8 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import chai, { expect } from 'chai';
+import { expect } from 'chai';
 
-import Body from '../../app/components/App';
+import Body from '../../app/components/Body';
 import HandleCategory from '../../app/containers/HandleCategory';
 import HandleProduct from '../../app/containers/HandleProduct';
 
@@ -21,7 +21,7 @@ describe('Body' , () => {
         expect(component.find(HandleCategory)).to.exist;
     });
 
-    it('has Body element"', () => {
+    it('has HandleProduct element"', () => {
         expect(component.find(HandleProduct)).to.exist;
     });
 

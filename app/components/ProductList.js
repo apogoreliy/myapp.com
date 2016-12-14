@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Product from './Product'
 import ProductModal from '../containers/ProductModal';
+import DeleteModal from '../containers/DeleteModal';
 
 class ProductList extends Component {
     constructor(props){
@@ -44,8 +45,14 @@ class ProductList extends Component {
                     </tbody>
                 </table>
                 <ProductModal />
+                {this.props.openDeleteProductModal && <DeleteModal/>}
             </div>)
     }
 }
+
+ProductList.propTypes = {
+    products: React.PropTypes.array,
+    openDeleteProductModal : React.PropTypes.bool
+};
 
 export default ProductList;

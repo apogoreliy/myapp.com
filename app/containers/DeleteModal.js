@@ -43,6 +43,13 @@ class DeleteModal extends Component {
     }
 }
 
+DeleteModal.propTypes = {
+    id: React.PropTypes.number,
+    mode: React.PropTypes.bool,
+    confirm: React.PropTypes.bool,
+    headerTitle : React.PropTypes.string,
+    bodyText : React.PropTypes.string,
+};
 
 const mapStateToProps = (state) => {
     return {

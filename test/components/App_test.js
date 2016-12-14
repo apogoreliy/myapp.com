@@ -1,11 +1,10 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import chai, { expect } from 'chai';
+import { expect } from 'chai';
 
 import App from '../../app/components/App';
 import HandleHeader from '../../app/containers/HandleHeader';
 import Body from '../../app/components/Body';
-import DeleteModal from '../../app/containers/DeleteModal';
 
 describe('App' , () => {
     let component;
@@ -30,11 +29,7 @@ describe('App' , () => {
         expect(component.find(Body)).to.exist;
     });
 
-    it('has DeleteModal element"', () => {
-        expect(component.find(DeleteModal)).to.exist;
-    });
-
-    it('has 3 children"', () => {
-        expect(component.children()).to.have.length(3);
+    it('has 2 children"', () => {
+        expect(component.children()).to.have.length(2);
     });
 });

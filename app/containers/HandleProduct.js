@@ -11,7 +11,8 @@ const mapStateToProps = (state) => {
                     state.category.selectedCategory :
                     (state.product.prods ? state.product.prods[0]['categoryID'] : 0)
                 )
-        }) : null
+        }) : null,
+        openDeleteProductModal : state.product.openDeleteProductModal
     }
 };
 

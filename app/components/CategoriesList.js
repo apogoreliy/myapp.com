@@ -1,5 +1,6 @@
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
 import CategoryModal from '../containers/CategoryModal';
+import DeleteModal from '../containers/DeleteModal';
 
 class CategoriesList extends Component{
     constructor(props){
@@ -30,10 +31,21 @@ class CategoriesList extends Component{
         return (
             <div className="col-md-3">
                 {this.props.categories && this.renderCategories()}
-                <CategoryModal />
+                {this.props.categories && <CategoryModal />}
+                {this.props.openDeleteCategoryModal && <DeleteModal/>}
             </div>
         )
     }
 }
+
+CategoriesList.propTypes = {
+    categories: React.PropTypes.shape({
+        cats: React.PropTypes.array
+    }),
+    fetchCategories: React.PropTypes.func.isRequired,
+    handleClick: React.PropTypes.func.isRequired,
+    selectCategory: React.PropTypes.func.isRequired,
+    openDeleteCategoryModal : React.PropTypes.bool
+};
 
 export default CategoriesList;
