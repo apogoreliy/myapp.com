@@ -1,1 +1,3 @@
-React App
+HI, SOSHACE!!!
+
+React Simple App

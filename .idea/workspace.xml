@@ -2,33 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7489429e-481c-465e-9a6a-41aa2e700c68" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/bundle.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/webpack.config.prod.js" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/components/ProductList.js" afterPath="$PROJECT_DIR$/app/components/ProductsList.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/containers/HandleCategory.js" afterPath="$PROJECT_DIR$/app/containers/HandleCategoriesList.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/containers/HandleProduct.js" afterPath="$PROJECT_DIR$/app/containers/HandleProductsList.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/dist/styles.css" afterPath="$PROJECT_DIR$/public/styles.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/actions/index.js" afterPath="$PROJECT_DIR$/app/actions/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/actions/types.js" afterPath="$PROJECT_DIR$/app/actions/types.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/components/App.js" afterPath="$PROJECT_DIR$/app/components/App.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/components/Body.js" afterPath="$PROJECT_DIR$/app/components/Body.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/components/CategoriesList.js" afterPath="$PROJECT_DIR$/app/components/CategoriesList.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/components/Header.js" afterPath="$PROJECT_DIR$/app/components/Header.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/components/Product.js" afterPath="$PROJECT_DIR$/app/components/Product.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/containers/CategoryModal.js" afterPath="$PROJECT_DIR$/app/containers/CategoryModal.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/containers/HandleHeader.js" afterPath="$PROJECT_DIR$/app/containers/HandleHeader.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/containers/ProductModal.js" afterPath="$PROJECT_DIR$/app/containers/ProductModal.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/reducers/category.js" afterPath="$PROJECT_DIR$/app/reducers/category.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/reducers/product.js" afterPath="$PROJECT_DIR$/app/reducers/product.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/utils/index.js" afterPath="$PROJECT_DIR$/app/utils/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/bundle.js" afterPath="$PROJECT_DIR$/public/bundle.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/db.js" afterPath="$PROJECT_DIR$/server/db.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/actions/index_test.js" afterPath="$PROJECT_DIR$/test/actions/index_test.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/components/Body_test.js" afterPath="$PROJECT_DIR$/test/components/Body_test.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/components/Header_test.js" afterPath="$PROJECT_DIR$/test/components/Header_test.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -74,12 +48,25 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Product_test.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Product_test.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test/components/Product_test.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="136">
               <caret line="13" column="22" lean-forward="false" selection-start-line="13" selection-start-column="22" selection-end-line="13" selection-end-column="22" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="34">
+                <caret line="2" column="12" lean-forward="false" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
+                <folding />
+              </first_editor>
+              <second_editor />
             </state>
           </provider>
         </entry>
@@ -132,7 +119,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/test/test_helper.js" />
         <option value="$PROJECT_DIR$/test/app_test.js" />
         <option value="$PROJECT_DIR$/test/fakeStore.js" />
         <option value="$PROJECT_DIR$/test/test.config.js" />
@@ -183,6 +169,7 @@
         <option value="$PROJECT_DIR$/app/utils/index.js" />
         <option value="$PROJECT_DIR$/app/components/Spinner.js" />
         <option value="$PROJECT_DIR$/test/components/Product_test.js" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -404,12 +391,12 @@
       <workItem from="1481440326099" duration="10208000" />
       <workItem from="1481477733102" duration="8716000" />
       <workItem from="1481487800326" duration="129797000" />
-      <workItem from="1481701896279" duration="79244000" />
+      <workItem from="1481701896279" duration="79652000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="331538000" />
+    <option name="totallyTimeSpent" value="331946000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -478,16 +465,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/test/components/App_test.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="45" lean-forward="false" selection-start-line="6" selection-start-column="45" selection-end-line="6" selection-end-column="45" />
-          <folding>
-            <element signature="e#0#26#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/dist2/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
@@ -929,6 +906,17 @@
         <state relative-caret-position="136">
           <caret line="13" column="22" lean-forward="false" selection-start-line="13" selection-start-column="22" selection-end-line="13" selection-end-column="22" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="34">
+            <caret line="2" column="12" lean-forward="false" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
+            <folding />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>
