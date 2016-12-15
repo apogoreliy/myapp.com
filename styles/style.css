@@ -27,6 +27,9 @@
 .modal-body > select, input, .modal-body .alert{
     margin-top: 15px;
 }
+.modal-footer button {
+    margin-right: 10px;
+}
 .category-item  a span:hover{
     cursor: pointer;
 }

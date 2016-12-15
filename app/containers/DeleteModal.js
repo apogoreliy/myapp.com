@@ -32,7 +32,10 @@ class DeleteModal extends Component {
                             <div className="text-holder"> {this.props.bodyText}</div>
                             <div className="modal-footer">
                                 <button type="button" className="btn btn-primary" onClick={this.handleClickBtn}>
-                                    Удалить
+                                    Да
+                                </button>
+                                <button type="button" className="btn btn-primary" onClick={this.cancelClick}>
+                                    Нет
                                 </button>
                             </div>
                         </div>
