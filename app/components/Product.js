@@ -2,16 +2,16 @@ import React, {PropTypes} from 'react';
 
 const Product = (props) => (
     <tr>
-        <td>{props.id}</td>
-        <td>{props.name}</td>
+        <td className="id">{props.id}</td>
+        <td className="name">{props.name}</td>
         <td>{props.purchasePrice}</td>
         <td>{props.price}</td>
-        <td>
+        <td className="product-buttons">
             <button className="btn btn-default product-btn" onClick={() => {
                 props.remove(props.id)
             }}>Удалить
             </button>
-            <button className="btn btn-default" onClick={() => {
+            <button className="btn btn-default edit-product" onClick={() => {
                 props.edit(props.id)
             }}>Изменить
             </button>

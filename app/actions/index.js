@@ -14,7 +14,11 @@ import {
     EDIT_PRODUCT,
     REMOVE_PRODUCT,
     GET_PRODUCTS,
-    GET_CATEGORIES
+    GET_CATEGORIES,
+    CLOSE_REMIND_MODAL,
+    OPEN_REMIND_MODAL,
+    START_LOAD,
+    STOP_LOAD
 } from './types';
 import utils from '../utils/index';
 
@@ -46,11 +50,27 @@ export const openDeleteProductModal = (id) => {
     }
 };
 
-export const addProduct = (categoryID, name, purchasePrice, price) => {
-    return function(dispatch) {
-        dispatch(closeProductModal());
+export const startLoading = ()=>{
+    return{
+        type: START_LOAD,
+        loaded : true
+    }
+};
 
-        utils.addProduct(categoryID, name, purchasePrice, price, function(response){
+export const stopLoading = ()=>{
+    return {
+        type: STOP_LOAD,
+        loaded: false
+    }
+};
+
+export const addProduct = (categoryID, name, purchasePrice, price) => {
+    return dispatch => {
+        dispatch(closeProductModal());
+        dispatch(startLoading());
+
+        utils.addProduct(categoryID, name, purchasePrice, price, (response => {
+            dispatch(stopLoading());
             dispatch({
                 type: ADD_PRODUCT,
                 categoryID,
@@ -59,12 +79,12 @@ export const addProduct = (categoryID, name, purchasePrice, price) => {
                 price,
                 productID: response.data.productID
             });
-        });
+        }));
     }
 };
 
 export const editProduct = (productID, categoryID, name, purchasePrice, price) => {
-    return function(dispatch) {
+    return dispatch => {
         dispatch(closeProductModal());
         dispatch({
             type: EDIT_PRODUCT,
@@ -80,7 +100,7 @@ export const editProduct = (productID, categoryID, name, purchasePrice, price) =
 };
 
 export const removeProduct = (id) => {
-    return function(dispatch) {
+    return dispatch => {
         dispatch(closeDeleteModal());
         dispatch({
             type: REMOVE_PRODUCT,
@@ -92,8 +112,11 @@ export const removeProduct = (id) => {
 };
 
 export const fetchProducts = () => {
-    return function(dispatch) {
-        utils.fetchProducts(function(response){
+    return dispatch => {
+        dispatch(startLoading());
+
+        utils.fetchProducts(response => {
+            dispatch(stopLoading());
             dispatch({
                 type: GET_PRODUCTS,
                 products: {prods :response.data}
@@ -120,9 +143,13 @@ export const closeProductModal = () => {
 
 //action for categories
 export const removeCategory = (id) => {
-    return function(dispatch) {
+    return dispatch => {
         dispatch(closeDeleteModal());
-        utils.removeCategory(id, function(response){
+        dispatch(startLoading());
+
+        utils.removeCategory(id, response=>{
+            dispatch(stopLoading());
+
             dispatch({
                 type: REMOVE_CATEGORY,
                 categories: {cats : response.data.cats}
@@ -137,10 +164,12 @@ export const removeCategory = (id) => {
 };
 
 export const addCategory = (name) => {
-    return function(dispatch) {
+    return dispatch => {
         dispatch(closeCategoryModal());
+        dispatch(startLoading());
 
-        utils.addCategory(name, function (response) {
+        utils.addCategory(name, response => {
+            dispatch(stopLoading());
             dispatch({
                 type: ADD_CATEGORY,
                 name,
@@ -155,7 +184,8 @@ export const fetchCategories = () => {
         utils.fetchCategories(function(response){
             dispatch({
                 type: GET_CATEGORIES,
-                categories: {cats : response.data}
+                categories: {cats : response.data},
+                openRemindModal : true
             });
         });
     }
@@ -187,5 +217,19 @@ export const openDeleteCategoryModal = (id) => {
         type: OPEN_DELETE_CATEGORY_MODAL,
         openDeleteCategoryModal : true,
         categoryID : id
+    }
+};
+
+export const openRemindModalFunc = () => {
+    return {
+        type: OPEN_REMIND_MODAL,
+        openRemindModal : true
+    }
+};
+
+export const closeRemindModal = () => {
+    return {
+        type: CLOSE_REMIND_MODAL,
+        openRemindModal : false
     }
 };

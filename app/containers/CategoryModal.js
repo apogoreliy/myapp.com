@@ -60,9 +60,9 @@ class CategoryModal extends Component{
 
 CategoryModal.propTypes = {
     confirm : PropTypes.bool,
-    headerTitle: PropTypes.string.isRequired,
-    close : PropTypes.func.isRequired,
-    handleClick : PropTypes.func.isRequired
+    headerTitle: PropTypes.string,
+    close : PropTypes.func,
+    handleClick : PropTypes.func
 };
 
 const mapStateToProps = (state) => {

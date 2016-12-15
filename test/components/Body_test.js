@@ -3,8 +3,8 @@ import { shallow } from 'enzyme';
 import { expect } from 'chai';
 
 import Body from '../../app/components/Body';
-import HandleCategory from '../../app/containers/HandleCategory';
-import HandleProduct from '../../app/containers/HandleProduct';
+import HandleCategoriesList from '../../app/containers/HandleCategoriesList';
+import HandleProductsList from '../../app/containers/HandleProductsList';
 
 describe('Body' , () => {
     let component;
@@ -18,11 +18,11 @@ describe('Body' , () => {
     });
 
     it('has HandleHeader element"', () => {
-        expect(component.find(HandleCategory)).to.exist;
+        expect(component.find(HandleCategoriesList)).to.exist;
     });
 
     it('has HandleProduct element"', () => {
-        expect(component.find(HandleProduct)).to.exist;
+        expect(component.find(HandleProductsList)).to.exist;
     });
 
     it('has 2 children"', () => {

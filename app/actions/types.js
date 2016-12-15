@@ -19,3 +19,8 @@ export const REMOVE_PRODUCT = 'removeProduct';
 
 export const GET_PRODUCTS = 'getProducts';
 export const GET_CATEGORIES = 'getCategories';
+export const CLOSE_REMIND_MODAL = 'closeRemindModal';
+export const OPEN_REMIND_MODAL = 'openRemindModal';
+
+export const START_LOAD = 'startLoad';
+export const STOP_LOAD = 'stopLoad';

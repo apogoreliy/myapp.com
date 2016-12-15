@@ -1,54 +1,21 @@
 import * as ActionCreators from '../../app/actions/index';
 import * as ActionTypes from '../../app/actions/types';
 
-import sinon from 'sinon';
-import sinonChai from 'sinon-chai';
-import chai, { expect } from 'chai';
+//import sinon from 'sinon';
+import { expect } from 'chai';
 
-chai.use(sinonChai);
+import configureMockStore from 'redux-mock-store';
+import thunk from 'redux-thunk';
+import nock from 'nock';
+const middlewares = [ thunk ];
+const mockStore = configureMockStore(middlewares);
+
+import utils from '../../app/utils/index';
 
 describe('Actions', () => {
-    before(() => {
-
-        //MockDate.set(new Date());
+    afterEach(() => {
+        nock.cleanAll();
     });
-    //after(() => MockDate.reset());
-
-    /*const appState = {
-        newMpg: 20,
-        tradeMpg: 10,
-        newPpg: 1.50,
-        tradePpg: 1.50,
-        milesDriven: 100,
-        milesDrivenTimeframe: 'week',
-        displayResults: false,
-        dateModified: null,
-        necessaryDataIsProvidedToCalculateSavings: false,
-        savings: {
-            monthly: 0,
-            annual: 0,
-            threeYear: 0
-        }
-    };
-    */
-
-/*
-    it('should create an action to save fuel savings', () => {
-        const dispatch = sinon.spy();
-        const expected = {
-            type: ActionTypes.SAVE_FUEL_SAVINGS,
-            dateModified,
-            settings: appState
-        };
-
-        // we expect this to return a function since it is a thunk
-        expect(typeof (ActionCreators.saveFuelSavings(appState))).to.equal('function');
-        // then we simulate calling it with dispatch as the store would do
-        ActionCreators.saveFuelSavings(appState)(dispatch);
-        // finally assert that the dispatch was called with our expected action
-        expect(dispatch).to.have.been.calledWith(expected);
-    });
-*/
 
     it('create an action to close DeleteModal component', () => {
         const actual = ActionCreators.closeDeleteModal();
@@ -149,6 +116,100 @@ describe('Actions', () => {
         };
 
         expect(actual).to.deep.equal(expected);
+    });
+
+    /*
+    it('create an action to remove category', () => {
+        const id = 10;
+        const actual = ActionCreators.removeCategory(id);
+        const dispatch = sinon.spy();
+
+        const categories = {
+
+        };
+
+        const expected = {
+            type: ActionTypes.REMOVE_CATEGORY,
+            categories: {cats : categories}
+        };
+
+        // we expect this to return a function since it is a thunk
+        expect(typeof actual).to.equal('function');
+        // then we simulate calling it with dispatch as the store would do
+        actual(dispatch);
+        // finally assert that the dispatch was called with our expected action
+        expect(dispatch).to.have.been.calledWith(expected);
+    });
+*/
+
+    it('create an action to fetch categories', () => {
+        const categories = [
+            { categoryID : 8, name : "Без категории"},
+            { categoryID : 9, name : "phones"}
+        ];
+
+        nock('http://localhost:3000')
+            .get('/get_categories')
+            .reply(200, { categories: {cats : categories}});
+
+        const expectedActions = [{
+            type: ActionTypes.GET_CATEGORIES,
+            categories: {cats : categories}
+        }];
+
+        const store = mockStore({ cats: categories });
+
+        /*
+        utils.fetchCategories(
+            response => {
+                dispatch({
+                    type: GET_CATEGORIES,
+                    categories: {cats : response.data}
+                });
+            }
+
+        );*/
+/*
+        console.log(ActionCreators.fetchCategories()());
+
+        return store.dispatch(ActionCreators.fetchCategories())
+            .then(() => { // return of async actions
+                expect(store.getState()).to.equal(expectedActions)
+            });
+*/
+        /*
+        return store.dispatch(ActionCreators.fetchCategories())
+            .then(() => { // return of async actions
+                expect(store.getActions()).to.equal(expectedActions)
+            });
+
+*/
+        /*
+        return store.dispatch(
+            utils.fetchCategories( ActionCreators.fetchCategories()
+                //.then(() => { // return of async actions
+                    expect(store.getActions()).toEqual(expectedActions)
+                //})
+            ));
+            */
+
+//        const actual = ActionCreators.fetchCategories();
+//        const dispatch = sinon.spy();
+/*
+        const expected = {
+            type: ActionTypes.GET_CATEGORIES,
+            categories: {cats : categories}
+        };
+*/
+
+        // we expect this to return a function since it is a thunk
+        //expect(typeof actual).to.equal('function');
+
+        // then we simulate calling it with dispatch as the store would do
+        //ActionCreators.fetchCategories()(dispatch);
+
+        // finally assert that the dispatch was called with our expected action
+        //expect(dispatch(actual)).to.have.been.calledWith(expected);
     });
 
 });

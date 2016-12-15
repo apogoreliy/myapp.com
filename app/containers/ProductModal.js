@@ -18,8 +18,10 @@ class ProductModal extends Component{
 
     componentWillReceiveProps(nextProps){
         this.setState({
-            categoryID : nextProps.product ? nextProps.product[0].categoryID :
-                ( nextProps.selectedCategory ? nextProps.selectedCategory : 0 ),
+            categoryID : nextProps.product && Object.keys(nextProps.product).length !== 0 ? nextProps.product[0].categoryID :
+                    ( nextProps.selectedCategory ? nextProps.selectedCategory :
+                        ( nextProps.categories && Object.keys(nextProps.categories).length !== 0 ? nextProps.categories[0].categoryID : 0 )
+                    ),
             name : nextProps.product ? nextProps.product[0].name : "",
             purchasePrice : nextProps.product ? nextProps.product[0].purchasePrice : "",
             price : nextProps.product ? nextProps.product[0].price : ""
@@ -134,7 +136,8 @@ ProductModal.propTypes = {
     product : PropTypes.array,
     categories : PropTypes.oneOfType([
         PropTypes.array,
-        PropTypes.object
+        PropTypes.object,
+        PropTypes.bool
     ]),
     selectedCategory : PropTypes.number,
     confirm : PropTypes.bool,

@@ -27,8 +27,8 @@ describe('Header' , () => {
         expect(wrapper.find('.header')).to.exist;
     });
 
-    it('has 3 children', () => {
-        expect(wrapper.find('.header').children()).to.have.length(3);
+    it('has 4 children', () => {
+        expect(wrapper.find('.header').children()).to.have.length(4);
     });
 
     it('has button with text "Добавить товар"', () => {
@@ -39,11 +39,6 @@ describe('Header' , () => {
     it('has button with text "Добавить категорию"', () => {
         const text = "Добавить категорию";
         expect(wrapper.find('.category-btn').text()).to.equal(text);
-    });
-
-    it('has span tag', () => {
-        const text = 'MY APP';
-        expect(wrapper.find('span').text()).to.equal(text);
     });
 
     it('has span tag', () => {

@@ -76,29 +76,25 @@ module.exports = {
         });
     },
 
-    checkAndCreateWithoutCategory: function(db){
+    checkIfCategoryHasProducts : function(id, collectionProds){
         return new Promise(function(resolve, reject) {
-            const collection = db.collection('categories');
-            collection.find({name: "Без категории"}).toArray(function (err, category) {
-                if(err) {
-                    reject(err)
+            collectionProds.find({categoryID: id}).forEach(
+                function () {
+                    resolve(true);
+                },
+                function () {
+                    resolve(false);
                 }
+            );
+        });
+    },
+
+    checkIfWithoutCategoryExist: function(collection){
+        return new Promise(function(resolve, reject) {
+            collection.find({name: "Без категории"}).toArray(function (err, category) {
+                if(err) { reject(err) }
                 else{
-                    if(!category[0]){
-                        var categoryID = null;
-                        collection.find().sort({categoryID: -1}).limit(1).toArray(function (err, category) {
-                            categoryID = !category[0] ? 0 : ++category[0]['categoryID'];
-                            collection.insert({name: "Без категории", categoryID: parseInt(categoryID)},
-                                function (err) {
-                                    if (err) {
-                                        reject(err)
-                                    }
-                                    else{
-                                        resolve(categoryID);
-                                    }
-                                });
-                        });
-                    }
+                    if(!category[0]){ resolve(false);}
                     else{
                         resolve(category[0]['categoryID']);
                     }
@@ -107,26 +103,49 @@ module.exports = {
         });
     },
 
-    getAndUpdateProductsByCategory : function(db, currentId, withoutCategoryId){
+    createWithoutCategory : function(id, collection){
         return new Promise(function(resolve, reject) {
-            const collection = db.collection('products');
-            const cursor = collection.find({categoryID: parseInt(currentId)});
-
-            cursor.forEach(
-                function (product) {
-                    collection.updateOne(
-                        {productID: parseInt(product.productID)},
-                        {$set: {categoryID: parseInt(withoutCategoryId)}},
-                        function (err) {
-                            if (err) { reject(err) }
-                            else { resolve() }
+            collection.find().sort({categoryID: -1}).limit(1).toArray(function (err, category) {
+                var categoryID = !category[0] ? 0 : ++category[0]['categoryID'];
+                collection.insert({name: "Без категории", categoryID: parseInt(categoryID)},
+                    function (err) {
+                        if (err) { reject(err) }
+                        else {
+                            resolve(categoryID);
                         }
-                    );
-                },
-                function(){
-                    resolve();
-                }
-            );
+                    });
+            });
+        });
+    },
+
+    updateProductsByCategory : function(collection, currentId, withoutCategoryId){
+        return new Promise(function(resolve, reject) {
+            if(withoutCategoryId) {
+                const cursor = collection.find({categoryID: currentId});
+
+                cursor.forEach(
+                    function (product) {
+                        collection.updateOne(
+                            {productID: parseInt(product.productID)},
+                            {$set: {categoryID: parseInt(withoutCategoryId)}},
+                            function (err) {
+                                if (err) {
+                                    reject(err)
+                                }
+                                else {
+                                    resolve()
+                                }
+                            }
+                        );
+                    },
+                    function () {
+                        resolve();
+                    }
+                );
+            }
+            else{
+                resolve();
+            }
         });
     },
 
@@ -144,18 +163,17 @@ module.exports = {
         });
     },
 
-    removeWithoutCategory: function(db, id){
-        const that =this;
+    removeWithoutCategory: function(collection, id){
         return new Promise(function(resolve, reject) {
-            db.collection('products').remove({categoryID: parseInt(id)}, function (err) {
+            collection.remove({categoryID: id}, function (err) {
                 err ? reject(err) : resolve();
             });
         });
     },
 
-    removeCategory : function(id, db){
+    removeCategory : function(id, collection){
         return new Promise(function(resolve, reject) {
-            db.collection('categories').deleteOne({categoryID: parseInt(id)}, function (err) {
+            collection.deleteOne({categoryID: id}, function (err) {
                 if(err){
                     reject(err)
                 } else{
@@ -165,22 +183,61 @@ module.exports = {
         });
     },
 
-    handleCategory: function(id){
+    handleCategory: function(currentId){
         const that =this;
+        var id = parseInt(currentId);
         return new Promise(function(resolve, reject) {
             that.connection().then(function (db) {
-                that.checkAndCreateWithoutCategory(db).then(function(categoryID){
-                    that.getAndUpdateProductsByCategory(db, id, categoryID).then(function () {
-                        if(id === categoryID){
-                            that.removeWithoutCategory(db, id).then(function () {
+                var collCat = db.collection('categories');
+                var collProd = db.collection('products');
+
+                that.checkIfCategoryHasProducts (id, collProd).then(function(res){
+                    if(res){
+                        that.checkIfWithoutCategoryExist(collCat).then(function(exist){
+                            if(exist){
+                                if(id === exist) {
+                                    that.removeWithoutCategory(collProd, id).then(function () {
+                                    });
+
+                                    that.removeCategory(id, collCat).then(function () {
+                                        that.getCategoriesAndProducts().then(function (obj) {
+                                            resolve(obj);
+                                        });
+                                    });
+                                }
+                                else {
+                                    that.updateProductsByCategory(collProd, id, exist).then(function () {
+                                        that.removeCategory(id, collCat).then(function () {
+                                            that.getCategoriesAndProducts().then(function (obj) {
+                                                resolve(obj);
+                                            });
+                                        });
+                                    });
+                                }
+                            }
+                            else{
+                                that.createWithoutCategory(id, collCat).then(function(createdId){
+                                    that.updateProductsByCategory(collProd, id, createdId).then(function(){
+                                        if(id === createdId){
+                                            that.removeWithoutCategory(collProd, id).then(function(){});
+                                        }
+                                        that.removeCategory(id, collCat).then(function(){
+                                            that.getCategoriesAndProducts().then(function(obj){
+                                                resolve(obj);
+                                            });
+                                        });
+                                    })
+                                });
+                            }
+                        });
+                    }
+                    else{
+                        that.removeCategory(id, collCat).then(function () {
+                            that.getCategoriesAndProducts().then(function(obj){
+                                resolve(obj);
                             });
-                        }
-                        that.removeCategory(id, db).then(function () {
-                        });
-                        that.getCategoriesAndProducts().then(function(obj){
-                            resolve(obj);
-                        });
-                    });
+                        })
+                    }
                 });
             });
         });

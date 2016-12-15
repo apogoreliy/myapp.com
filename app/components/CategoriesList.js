@@ -11,15 +11,17 @@ class CategoriesList extends Component{
         this.props.fetchCategories();
     }
 
-    renderCategories () {
+    renderCategories (categories, handleClick, selectedCategory, selectCategory) {
         let arr = [];
-        for (let i in this.props.categories.cats){
-            if( this.props.categories.cats.hasOwnProperty( i ) ) {
-                let obj = this.props.categories.cats[i];
+        for (let i in categories){
+            if( categories.hasOwnProperty( i ) ) {
+                let obj = categories[i];
                 arr.push (
                     <div key={'category'+obj.categoryID} className="category-item">
-                        <span className="btn btn-default" onClick={e => this.props.handleClick(obj.categoryID)} >X</span>
-                        <a className={this.props.selectedCategory === obj.categoryID && "active"} onClick={e => { e.preventDefault(); this.props.selectCategory(obj.categoryID)}}> {obj.name} </a>
+                        <span className="btn btn-default" onClick={e => handleClick(obj.categoryID)} >X</span>
+                        <a className={selectedCategory === obj.categoryID && "active"}
+                           onClick={e => { e.preventDefault(); selectCategory(obj.categoryID)}}> {obj.name}
+                        </a>
                     </div>
                 );
             }
@@ -30,23 +32,33 @@ class CategoriesList extends Component{
     render() {
         return (
             <div className="col-md-3">
-                {this.props.categories && this.renderCategories()}
-                {this.props.categories && <CategoryModal />}
-                {this.props.openDeleteCategoryModal && <DeleteModal/>}
+                { this.props.categories &&
+                    this.renderCategories(
+                        this.props.categories, this.props.handleClick,
+                        this.props.selectedCategory, this.props.selectCategory
+                    )
+                }
+                { this.props.openAddCategoryModal && <CategoryModal /> }
+                { this.props.openDeleteCategoryModal && <DeleteModal/> }
             </div>
         )
     }
 }
 
 CategoriesList.propTypes = {
-    categories: React.PropTypes.shape({
-        cats: React.PropTypes.array
-    }),
+    categories: React.PropTypes.oneOfType([
+        PropTypes.bool,
+        PropTypes.array
+    ]),
     fetchCategories: React.PropTypes.func.isRequired,
     handleClick: React.PropTypes.func.isRequired,
     selectCategory: React.PropTypes.func.isRequired,
     openDeleteCategoryModal : React.PropTypes.bool,
-    selectedCategory : PropTypes.number
+    selectedCategory : PropTypes.oneOfType([
+        PropTypes.number,
+        PropTypes.string
+    ]),
+    openAddCategoryModal : React.PropTypes.bool
 };
 
 export default CategoriesList;

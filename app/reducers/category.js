@@ -10,12 +10,12 @@ import {
 } from '../actions/types';
 
 export default (state = {}, action) => {
-    let categories = state.cats ? state.cats : "";
     switch (action.type) {
         case CLOSE_CATEGORY_MODAL:
             return Object.assign({}, state, {
                 openAddCategoryModal : action.openAddCategoryModal
             });
+
         case OPEN_ADD_CATEGORY_MODAL:
             return Object.assign({}, state, {
                 openAddCategoryModal : action.openAddCategoryModal,
@@ -38,14 +38,13 @@ export default (state = {}, action) => {
             return Object.assign({}, state, {
                 selectedCategory : action.selectedCategory
             });
+
         case ADD_CATEGORY:
-            return Object.assign({}, state, {
-                cats : [...categories, action]
-            });
+            return Object.assign({}, state, { cats : [...state.cats, action]});
 
         case REMOVE_CATEGORY:
         case GET_CATEGORIES:
-            return Object.assign({}, state, action.categories);
+            return Object.assign({}, state, action.categories, action.openRemindModal);
     }
     return state;
 };
