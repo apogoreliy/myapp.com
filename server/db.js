@@ -12,6 +12,7 @@ module.exports = {
         })
     },
 
+
     addProduct: function(product){
         const that =this;
         return new Promise(function(resolve, reject) {
