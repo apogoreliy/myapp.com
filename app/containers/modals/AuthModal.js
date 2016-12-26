@@ -135,8 +135,6 @@ AuthModal.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-    console.log('auth', state);
-
     return {
         mode : state.auth.openSignUpModal,
         error : state.auth.error
