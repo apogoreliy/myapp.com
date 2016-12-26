@@ -1,49 +1,40 @@
-import {
-    CLOSE_CATEGORY_MODAL,
-    OPEN_ADD_CATEGORY_MODAL,
-    OPEN_DELETE_CATEGORY_MODAL,
-    CLOSE_DELETE_MODAL,
-    SELECT_CATEGORY,
-    ADD_CATEGORY,
-    REMOVE_CATEGORY,
-    GET_CATEGORIES
-} from '../actions/types';
+import * as actions from '../../actions/types';
 
 export default (state = {}, action) => {
     switch (action.type) {
-        case CLOSE_CATEGORY_MODAL:
+        case actions.CLOSE_CATEGORY_MODAL:
             return Object.assign({}, state, {
                 openAddCategoryModal : action.openAddCategoryModal
             });
 
-        case OPEN_ADD_CATEGORY_MODAL:
+        case actions.OPEN_ADD_CATEGORY_MODAL:
             return Object.assign({}, state, {
                 openAddCategoryModal : action.openAddCategoryModal,
                 categoryID: action.categoryID
             });
 
-        case OPEN_DELETE_CATEGORY_MODAL:
+        case actions.OPEN_DELETE_CATEGORY_MODAL:
             return Object.assign({}, state, {
                 openDeleteCategoryModal : action.openDeleteCategoryModal,
                 categoryID : action.categoryID
             });
 
-        case CLOSE_DELETE_MODAL:
+        case actions.CLOSE_DELETE_MODAL:
             return Object.assign({}, state, {
                 openDeleteCategoryModal : action.openDeleteCategoryModal,
                 categoryID : action.categoryID
             });
 
-        case SELECT_CATEGORY:
+        case actions.SELECT_CATEGORY:
             return Object.assign({}, state, {
                 selectedCategory : action.selectedCategory
             });
 
-        case ADD_CATEGORY:
+        case actions.ADD_CATEGORY:
             return Object.assign({}, state, { cats : [...state.cats, action]});
 
-        case REMOVE_CATEGORY:
-        case GET_CATEGORIES:
+        case actions.REMOVE_CATEGORY:
+        case actions.GET_CATEGORIES:
             return Object.assign({}, state, action.categories, action.openRemindModal);
     }
     return state;

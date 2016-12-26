@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import Product from './Product';
-import ProductModal from '../containers/ProductModal';
-import DeleteModal from '../containers/DeleteModal';
+import ProductModal from '../../containers/Store/ProductModal';
+import DeleteModal from '../../containers/Store/DeleteModal';
 import RemindModal from './RemindModal';
 
 class ProductList extends Component {
@@ -36,20 +36,20 @@ class ProductList extends Component {
             <div className="col-md-9">
                 <table className="table table-hover">
                     <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Название товара</th>
-                        <th>Цена / зак.</th>
-                        <th>Цена</th>
-                        <th>&#032;</th>
-                    </tr>
+                        <tr>
+                            <th>Id</th>
+                            <th>Название товара</th>
+                            <th>Цена / зак.</th>
+                            <th>Цена</th>
+                            <th>&#032;</th>
+                        </tr>
                     </thead>
                     <tbody>
-                    {this.props.products && this.renderProducts(this.props.products, this.props.remove, this.props.edit)}
+                        {this.props.products && this.renderProducts(this.props.products, this.props.remove, this.props.edit)}
                     </tbody>
                 </table>
 
-                 <ProductModal />
+                {this.props.openProductModal && <ProductModal /> }
                 { this.props.openRemindModal && <RemindModal handleClickBtn={this.props.closeRemindModal} text={this.props.remindModalText} /> }
                 {this.props.openDeleteProductModal && <DeleteModal/>}
             </div>)

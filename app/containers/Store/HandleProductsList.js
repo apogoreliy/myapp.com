@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { openEditProductModal, openDeleteProductModal, fetchProducts, closeRemindModal } from '../actions'
-import ProductList from '../components/ProductsList';
+import { openEditProductModal, openDeleteProductModal, fetchProducts, closeRemindModal } from '../../actions/Store/index'
+import ProductList from '../../components/Store/ProductsList';
 
 const mapStateToProps = (state) => {
     return {

@@ -7,16 +7,9 @@
 .category-item a.active{
     font-weight: bold;
 }
-.header{
-    margin-top : 40px;
-    margin-bottom: 40px
-}
-.header > span{
-    border: 1px solid black;
-    float: left;
-    padding: 10px;
-    border-radius: 5px;
-    margin-right: 180px
+.auth-panel{
+    margin-top: 7px;
+    float: right;
 }
 .product-btn{
     margin-right: 10px
@@ -61,4 +54,8 @@
     height: 100%;
     vertical-align: middle;
     min-height: 600px;
+}
+.nav li a.active {
+    color: #555 !important;
+    background-color: #e7e7e7 !important;
 }

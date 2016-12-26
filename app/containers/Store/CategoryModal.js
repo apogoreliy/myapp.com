@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import { connect } from 'react-redux'
-import { closeCategoryModal, addCategory } from '../actions'
+import { closeCategoryModal, addCategory } from '../../actions/Store/index'
 
 class CategoryModal extends Component{
     constructor(props){
@@ -31,7 +31,7 @@ class CategoryModal extends Component{
     render(){
         return (
             <div>
-                <div style={{display: this.props.confirm ? "block" : "none"}} className="modal in" role="dialog"
+                <div style={{display: "block"}} className="modal in" role="dialog"
                      aria-labelledby="modal-label">
                     <div className="modal-dialog" role="document">
                         <div className="modal-content">
@@ -48,26 +48,28 @@ class CategoryModal extends Component{
                                         onClick={this.handleClickBtn}>
                                     Сохранить
                                 </button>
+                                <button type="button" className="btn btn-danger" autoFocus={this.props.confirm}
+                                        onClick={this.cancelClick}>
+                                    Отменить
+                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div style={{display: this.props.confirm ? "block" : "none"}} className="modal-backdrop in"></div>
+                <div style={{display: "block"}} className="modal-backdrop in"></div>
             </div>
         );
     }
 }
 
 CategoryModal.propTypes = {
-    confirm : PropTypes.bool,
     headerTitle: PropTypes.string,
     close : PropTypes.func,
     handleClick : PropTypes.func
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = () => {
     return {
-        confirm : state.category.openAddCategoryModal,
         headerTitle : "Добавить категорию"
     }
 };

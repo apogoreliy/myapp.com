@@ -62,7 +62,25 @@ module.exports = {
             .catch(err => {
                 console.log('err', err)
             });
+    },
+
+    auth : function(type, login, password, callback){
+        axios.post(`${ROOT_URL}/auth`, {type, login, password})
+            .then((response) => {
+                callback(response);
+            })
+            .catch(err => {
+                console.log('err', err)
+            });
+    },
+
+    checkAuth : function(token, callback){
+        axios.post(`${ROOT_URL}/check_auth`, {token})
+            .then((response) => {
+                callback(response);
+            })
+            .catch(err => {
+                console.log('err', err)
+            });
     }
-
-
 };

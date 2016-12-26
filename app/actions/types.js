@@ -24,3 +24,10 @@ export const OPEN_REMIND_MODAL = 'openRemindModal';
 
 export const START_LOAD = 'startLoad';
 export const STOP_LOAD = 'stopLoad';
+
+export const OPEN_AUTH_MODAL_TO_SIGNIN = 'openAuthModalToSignIn';
+export const OPEN_AUTH_MODAL_TO_SIGNUP = 'openAuthModalToSignUp';
+export const CLOSE_AUTH_MODAL = 'closeAuthModal';
+
+export const AUTH = 'auth';
+export const SIGN_OUT = 'signOut';

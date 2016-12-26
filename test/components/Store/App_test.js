@@ -2,9 +2,9 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { expect } from 'chai';
 
-import App from '../../app/components/App';
-import HandleHeader from '../../app/containers/HandleHeader';
-import Body from '../../app/components/Body';
+import App from '../../../app/components/Store/App';
+import HandleHeader from '../../../app/containers/Store/HandleHandler';
+import Body from '../../../app/components/Store/Body';
 
 describe('App' , () => {
     let component;

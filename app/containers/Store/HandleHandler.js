@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
-import { openProductModal, openCategoryModal, openRemindModalFunc } from '../actions'
-import Header from '../components/Header'
+import { openProductModal, openCategoryModal, openRemindModalFunc } from '../../actions/Store/index'
+import Handler from '../../components/Store/Handler'
 
 const mapStateToProps = (state) => {
     return{
@@ -25,4 +25,4 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(Header);
+)(Handler);

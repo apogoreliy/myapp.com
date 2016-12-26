@@ -2,6 +2,8 @@
 const MongoClient = require('mongodb').MongoClient;
 const URL = 'mongodb://apogoreliy:7spirits@ds131878.mlab.com:31878/myapp';
 const Promise = require('rsvp').Promise;
+const jwt = require('jwt-simple');
+const config = require('./config');
 
 module.exports = {
     connection : function() {
@@ -266,6 +268,77 @@ module.exports = {
                 });
             });
         });
-    }
+    },
 
+    checkIfUserExists: function(collection, login){
+        return new Promise(function(resolve, reject) {
+            collection.find({login}).toArray(function (err, user) {
+                if(err) { reject(err) }
+                else{
+                    if(!user[0]){ resolve(false);}
+                    else{
+                        resolve(user[0].token);
+                    }
+                }
+            });
+        });
+    },
+
+    auth : function (type, login, password) {
+        const that =this;
+        return new Promise(function(resolve, reject) {
+            if (!login || !password) {
+                resolve({errorData : true});
+            }
+
+            that.connection().then(function(db) {
+                const collection = db.collection('user');
+                var token = that.tokenForUser(login, password);
+
+                that.checkIfUserExists(collection, login).then(function(user){
+                    if(user && type === 'signUp'){
+                        resolve({userExist : true});
+                    }
+                    else if(!user && type === 'signUp'){
+                        collection.insert({login, token}, function (err) {
+                            err ? reject(err) : resolve({token : token});
+                        });
+                    }
+                    else if(user && type === 'signIn'){
+                        resolve(token !== user ? {errorToken: true} : {token});
+                    }
+                    else if(!user && type === 'signIn'){
+                        resolve({userUnexist : true});
+                    }
+                });
+            });
+        });
+    },
+
+    checkAuth : function(token){
+        const that =this;
+        return new Promise(function(resolve, reject) {
+            if (!token) {
+                resolve({errorToken : true});
+            }
+
+            that.connection().then(function(db) {
+                const collection = db.collection('user');
+                collection.find({token}).toArray(function (err, user) {
+                    if(err) { reject(err) }
+                    else{
+                        if(!user[0]){
+                            resolve({errorToken : true});}
+                        else{
+                            resolve({loggedIn : true});
+                        }
+                    }
+                });
+            });
+        });
+    },
+
+    tokenForUser: function(login, password) {
+        return jwt.encode({ password, login }, config.secret);
+    }
 };

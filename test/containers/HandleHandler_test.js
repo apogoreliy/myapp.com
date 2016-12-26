@@ -3,10 +3,10 @@ import { Provider } from 'react-redux';
 import { shallow } from 'enzyme';
 import { expect } from 'chai';
 
-import HandleHeader from '../../app/containers/HandleHeader';
+import HandleHandler from '../../app/containers/Store/HandleHandler';
 import {storeFake} from '../storeFake'
 
-describe('HandleHeader' , () => {
+describe('HandleHandler' , () => {
     let component;
 
     beforeEach(() => {
@@ -17,7 +17,7 @@ describe('HandleHeader' , () => {
             </Provider>
         );
 
-        component = wrapper.find(HandleHeader);
+        component = wrapper.find(HandleHandler);
     });
 
     it('renders correct', () => {

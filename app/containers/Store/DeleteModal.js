@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import { connect } from 'react-redux'
-import { closeDeleteModal, removeCategory, removeProduct } from '../actions'
+import { closeDeleteModal, removeCategory, removeProduct } from '../../actions/Store/index'
 
 class DeleteModal extends Component {
     constructor(props) {
@@ -21,7 +21,7 @@ class DeleteModal extends Component {
     render() {
         return (
             <div>
-                <div style={{display: this.props.confirm ? "block" : "none"}} className="modal in" role="dialog"
+                <div style={{display: "block"}} className="modal in" role="dialog"
                      aria-labelledby="modal-label">
                     <div className="modal-dialog" role="document">
                         <div className="modal-content">
@@ -34,14 +34,14 @@ class DeleteModal extends Component {
                                 <button type="button" className="btn btn-primary" onClick={this.handleClickBtn}>
                                     Да
                                 </button>
-                                <button type="button" className="btn btn-primary" onClick={this.cancelClick}>
+                                <button type="button" className="btn btn-danger" onClick={this.cancelClick}>
                                     Нет
                                 </button>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div style={{display: this.props.confirm ? "block" : "none"}} className="modal-backdrop in"></div>
+                <div style={{display: "block"}} className="modal-backdrop in"></div>
             </div>
         )
     }
@@ -50,7 +50,6 @@ class DeleteModal extends Component {
 DeleteModal.propTypes = {
     id: PropTypes.number,
     mode: PropTypes.bool,
-    confirm: PropTypes.bool,
     headerTitle : PropTypes.string,
     bodyText : PropTypes.string,
 };
@@ -59,7 +58,6 @@ const mapStateToProps = (state) => {
     return {
         id : state.category.openDeleteCategoryModal ? state.category.categoryID : state.product.productID,
         mode : state.category.openDeleteCategoryModal,
-        confirm : state.category.openDeleteCategoryModal || state.product.openDeleteProductModal,
         headerTitle : state.category.openDeleteCategoryModal ? "Хотите удалить категорию" : "Точно удалить товар",
         bodyText : state.category.openDeleteCategoryModal ? "Все товары этой категории будут помечены 'Без категории'" : ""
     }

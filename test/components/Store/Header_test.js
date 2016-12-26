@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 import { expect } from 'chai';
 import sinon from 'sinon';
 
-import Header from '../../app/components/Header';
+import Header from '../../../app/components/Store/Header';
 
 describe('Header' , () => {
     let wrapper;

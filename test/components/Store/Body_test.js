@@ -2,9 +2,9 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { expect } from 'chai';
 
-import Body from '../../app/components/Body';
-import HandleCategoriesList from '../../app/containers/HandleCategoriesList';
-import HandleProductsList from '../../app/containers/HandleProductsList';
+import Body from '../../../app/components/Store/Body';
+import HandleCategoriesList from '../../../app/containers/Store/HandleCategoriesList';
+import HandleProductsList from '../../../app/containers/Store/HandleProductsList';
 
 describe('Body' , () => {
     let component;

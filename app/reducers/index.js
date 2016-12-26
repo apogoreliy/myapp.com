@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux'
-import product from './product';
-import category from './category';
+import product from './Store/product';
+import category from './Store/category';
+import auth from './auth';
 
 export default combineReducers({
     product,
-    category
+    category,
+    auth
 });

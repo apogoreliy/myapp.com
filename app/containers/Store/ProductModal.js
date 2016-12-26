@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import { connect } from 'react-redux'
-import { closeProductModal, addProduct, editProduct } from '../actions'
+import { closeProductModal, addProduct, editProduct } from '../../actions/Store/index'
 
 class ProductModal extends Component{
     constructor(props){
@@ -16,15 +16,15 @@ class ProductModal extends Component{
         this.handleChangePrice = this.handleChangePrice.bind(this);
     }
 
-    componentWillReceiveProps(nextProps){
+    componentDidMount(){
         this.setState({
-            categoryID : nextProps.product && Object.keys(nextProps.product).length !== 0 ? nextProps.product[0].categoryID :
-                    ( nextProps.selectedCategory ? nextProps.selectedCategory :
-                        ( nextProps.categories && Object.keys(nextProps.categories).length !== 0 ? nextProps.categories[0].categoryID : 0 )
-                    ),
-            name : nextProps.product ? nextProps.product[0].name : "",
-            purchasePrice : nextProps.product ? nextProps.product[0].purchasePrice : "",
-            price : nextProps.product ? nextProps.product[0].price : ""
+            categoryID : this.props.product && Object.keys(this.props.product).length !== 0 ? this.props.product[0].categoryID :
+                ( this.props.selectedCategory ? this.props.selectedCategory :
+                        ( this.props.categories && Object.keys(this.props.categories).length !== 0 ? this.props.categories[0].categoryID : 0 )
+                ),
+            name : this.props.product ? this.props.product[0].name : "",
+            purchasePrice : this.props.product ? this.props.product[0].purchasePrice : "",
+            price : this.props.product ? this.props.product[0].price : ""
         });
     }
 
@@ -75,7 +75,7 @@ class ProductModal extends Component{
     render() {
         return (
             <div>
-                <div style={{display: this.props.confirm ? "block" : "none"}} className="modal in" role="dialog"
+                <div style={{display: "block"}} className="modal in" role="dialog"
                      aria-labelledby="modal-label">
                     <div className="modal-dialog" role="document">
                         <div className="modal-content">
@@ -120,11 +120,15 @@ class ProductModal extends Component{
                                         onClick={this.handleClickBtn}>
                                     Сохранить
                                 </button>
+                                <button type="button" className="btn btn-danger"
+                                        onClick={this.cancelClick}>
+                                    Отменить
+                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div style={{display: this.props.confirm ? "block" : "none"}} className="modal-backdrop in"></div>
+                <div style={{display: "block"}} className="modal-backdrop in"></div>
             </div>
         )
     }
@@ -140,7 +144,6 @@ ProductModal.propTypes = {
         PropTypes.bool
     ]),
     selectedCategory : PropTypes.number,
-    confirm : PropTypes.bool,
     headerTitle : PropTypes.string
 };
 
@@ -153,7 +156,6 @@ const mapStateToProps = (state) => {
             null,
         categories : state.category.cats,
         selectedCategory : state.category.selectedCategory,
-        confirm : state.product.openAddProductModal || state.product.openEditProductModal,
         headerTitle : state.product.openAddProductModal ? "Добавить товар" : "Изменить товар"
     }
 };

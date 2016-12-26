@@ -1,24 +1,25 @@
 import React, {PropTypes} from 'react';
 import { connect } from 'react-redux';
-import HandleHeader from '../containers/HandleHeader';
-import Body from './Body';
-import Spinner from './Spinner';
+import Navbar from './Navbar';
+import AuthModal from '../containers/modals/AuthModal';
 
-const App = ({loaded}) => (
-    <div className="container">
-        <HandleHeader />
-        <Body/>
-        <Spinner loaded={loaded}/>
+const App = ({children, showAuthModal}) => (
+    <div>
+        <Navbar />
+        { showAuthModal && <AuthModal /> }
+        {children}
     </div>
 );
 
 App.propTypes = {
-    loaded : PropTypes.bool
+    children : PropTypes.any.isRequired,
+    showAuthModal : PropTypes.bool
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, props) => {
     return {
-        loaded : state.product.loaded
+        showAuthModal : state.auth.openSignInModal || state.auth.openSignUpModal,
+        children : props.children
     }
 };
 

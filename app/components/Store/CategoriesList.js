@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
-import CategoryModal from '../containers/CategoryModal';
-import DeleteModal from '../containers/DeleteModal';
+import CategoryModal from '../../containers/Store/CategoryModal';
+import DeleteModal from '../../containers/Store/DeleteModal';
 
 class CategoriesList extends Component{
     constructor(props){

@@ -1,18 +1,17 @@
 import React, {PropTypes} from 'react';
 
-const Header = ({openRemindModal, openRemindModalFunc, addProduct, addCategory, loaded}) => (
-    <div className="header">
-        <span>MY APP</span>
+const Handler = ({openRemindModal, openRemindModalFunc, addProduct, addCategory, loaded}) => (
+    <div style={{marginBottom : "20px"}}>
         <button type="button" className="btn btn-default product-btn" onClick={() => {
             openRemindModal || openRemindModal === undefined ? openRemindModalFunc() : addProduct()}
         }>Добавить товар</button>
-        <button type="button" className="btn btn-default category-btn" onClick={() => {addCategory()}}>Добавить категорию</button>
+        <button type="button" className="btn btn-default category-btn" onClick={addCategory}>Добавить категорию</button>
     </div>
 );
 
-Header.propTypes = {
+Handler.propTypes = {
     addProduct : PropTypes.func.isRequired,
     addCategory : PropTypes.func.isRequired
 };
 
-export default Header;
+export default Handler;
