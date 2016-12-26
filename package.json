@@ -23,8 +23,6 @@
     "extract-text-webpack-plugin": "^1.0.1",
     "html-webpack-plugin": "^2.24.1",
     "jquery": "^2.2.1",
-    "jsdom": "^8.1.0",
-    "jwt-simple": "^0.5.1",
     "mocha": "^2.4.5",
     "nock": "^9.0.2",
     "react-addons-test-utils": "^0.14.7",
@@ -50,6 +48,8 @@
     "redux": "^3.0.4",
     "redux-thunk": "^2.1.0",
     "rsvp": "^3.3.3",
-    "validator": "^6.2.0"
+    "validator": "^6.2.0",
+    "jwt-simple": "^0.5.1",
+    "jsdom": "^8.1.0"
   }
 }
