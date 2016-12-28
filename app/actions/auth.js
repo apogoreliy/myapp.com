@@ -1,5 +1,6 @@
 import * as actions from './types';
 import utils from '../utils/index';
+import { browserHistory} from 'react-router';
 
 export const openAuthModalToSignIn = () => {
     return {

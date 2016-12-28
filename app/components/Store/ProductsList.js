@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import Product from './Product';
-import ProductModal from '../../containers/Store/ProductModal';
-import DeleteModal from '../../containers/Store/DeleteModal';
+import HandleProductModal from '../../containers/Store/HandleProductModal';
+import HandleDeleteModal from '../../containers/Store/HandleDeleteModal';
 import RemindModal from './RemindModal';
 
 class ProductList extends Component {
@@ -49,9 +49,9 @@ class ProductList extends Component {
                     </tbody>
                 </table>
 
-                {this.props.openProductModal && <ProductModal /> }
+                {this.props.openProductModal && <HandleProductModal /> }
                 { this.props.openRemindModal && <RemindModal handleClickBtn={this.props.closeRemindModal} text={this.props.remindModalText} /> }
-                {this.props.openDeleteProductModal && <DeleteModal/>}
+                {this.props.openDeleteProductModal && <HandleDeleteModal/>}
             </div>)
     }
 }

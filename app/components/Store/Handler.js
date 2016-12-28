@@ -1,11 +1,11 @@
 import React, {PropTypes} from 'react';
+import Button from '../common/Button'
 
 const Handler = ({openRemindModal, openRemindModalFunc, addProduct, addCategory, loaded}) => (
     <div style={{marginBottom : "20px"}}>
-        <button type="button" className="btn btn-default product-btn" onClick={() => {
-            openRemindModal || openRemindModal === undefined ? openRemindModalFunc() : addProduct()}
-        }>Добавить товар</button>
-        <button type="button" className="btn btn-default category-btn" onClick={addCategory}>Добавить категорию</button>
+        <Button classSet="btn-default product-btn" handleClick={() => {
+            openRemindModal || openRemindModal === undefined ? openRemindModalFunc() : addProduct()}} text="Добавить товар"/>
+        <Button classSet="btn-default category-btn" handleClick={addCategory} text="Добавить категорию"/>
     </div>
 );
 

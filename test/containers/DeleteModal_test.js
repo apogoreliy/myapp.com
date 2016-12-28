@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 import { shallow } from 'enzyme';
 import { expect } from 'chai';
 
-import DeleteModal from '../../app/containers/Store/DeleteModal';
+import DeleteModal from '../../app/components/Store/DeleteModal';
 import {storeFake} from '../storeFake'
 
 describe('DeleteModal' , () => {

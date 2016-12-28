@@ -1,4 +1,3 @@
-import React from 'react';
 import { connect } from 'react-redux'
 import { openDeleteCategoryModal, selectCategory, fetchCategories } from '../../actions/Store/index'
 import CategoriesList from '../../components/Store/CategoriesList';

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import HandleHandler from '../../containers/Store/HandleHandler';
 import HandleProductsList from '../../containers/Store/HandleProductsList';
 import HandleCategoriesList from '../../containers/Store/HandleCategoriesList';
-import Spinner from '../Spinner';
+import Spinner from '../common/Spinner';
 
 const StorePage = ({loaded}) => (
     <div className="container">

@@ -1,4 +1,3 @@
-import React from 'react';
 import { connect } from 'react-redux'
 import { openEditProductModal, openDeleteProductModal, fetchProducts, closeRemindModal } from '../../actions/Store/index'
 import ProductList from '../../components/Store/ProductsList';

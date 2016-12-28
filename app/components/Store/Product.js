@@ -1,4 +1,5 @@
 import React, {PropTypes} from 'react';
+import Button from '../common/Button';
 
 const Product = (props) => (
     <tr>
@@ -7,12 +8,8 @@ const Product = (props) => (
         <td>{props.purchasePrice}</td>
         <td>{props.price}</td>
         <td className="product-buttons">
-            <button className="btn btn-default product-btn" onClick={() => { props.remove(props.id) }}>
-                Удалить
-            </button>
-            <button className="btn btn-default edit-product" onClick={() => { props.edit(props.id) }}>
-                Изменить
-            </button>
+            <Button classSet="btn-default product-btn" handleClick={() => { props.remove(props.id) }} text="Удалить"/>
+            <Button classSet="btn-default edit-btn" handleClick={() => { props.edit(props.id) }} text="Изменить"/>
         </td>
     </tr>
 );

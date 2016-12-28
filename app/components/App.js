@@ -1,12 +1,12 @@
 import React, {PropTypes} from 'react';
 import { connect } from 'react-redux';
 import Navbar from './Navbar';
-import AuthModal from '../containers/modals/AuthModal';
+import HandleAuthModal from '../containers/HandleAuthModal';
 
 const App = ({children, showAuthModal}) => (
     <div>
         <Navbar />
-        { showAuthModal && <AuthModal /> }
+        { showAuthModal && <HandleAuthModal /> }
         {children}
     </div>
 );

@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
-import CategoryModal from '../../containers/Store/CategoryModal';
-import DeleteModal from '../../containers/Store/DeleteModal';
+import HandleCategoryModal from '../../containers/Store/HandleCategoryModal';
+import HandleDeleteModal from '../../containers/Store/HandleDeleteModal';
 
 class CategoriesList extends Component{
     constructor(props){
@@ -38,8 +38,8 @@ class CategoriesList extends Component{
                         this.props.selectedCategory, this.props.selectCategory
                     )
                 }
-                { this.props.openAddCategoryModal && <CategoryModal /> }
-                { this.props.openDeleteCategoryModal && <DeleteModal/> }
+                { this.props.openAddCategoryModal && <HandleCategoryModal /> }
+                { this.props.openDeleteCategoryModal && <HandleDeleteModal/> }
             </div>
         )
     }

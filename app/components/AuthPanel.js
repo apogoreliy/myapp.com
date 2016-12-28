@@ -1,11 +1,14 @@
 import React from 'react';
+import Button from './common/Button';
 
 const AuthPanel = ({loggedIn, openAuthModalToSignIn, openAuthModalToSignUp, signOut}) => (
     <div className="auth-panel">
-        { loggedIn ? <button type="button" className="btn btn-primary category-btn" onClick={signOut}>Выйти</button> :
+        { loggedIn ?
+            <Button classSet="btn-primary category-btn" handleClick={signOut} text="Выйти"/>
+            :
             <div>
-                <button type="button" className="btn btn-primary product-btn" onClick={openAuthModalToSignIn}>Войти</button>
-                <button type = "button" className="btn btn-primary category-btn" onClick={openAuthModalToSignUp}>Зарегистрироваться</button>
+                <Button classSet="btn-primary product-btn" handleClick={openAuthModalToSignIn} text="Войти"/>
+                <Button classSet="btn-primary category-btn" handleClick={openAuthModalToSignUp} text="Зарегистрироваться"/>
             </div>
         }
     </div>
