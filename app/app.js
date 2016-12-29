@@ -6,7 +6,7 @@ import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import reduxThunk from 'redux-thunk'
 import rootReducer from './reducers';
 
-import App from './components/App';
+import HandleApp from './containers/HandleApp';
 import StorePage from './components/Store/StorePage';
 import WelcomePage from './components/WelcomePage';
 import WeatherPage from './components/Weather/WeatherPage';
@@ -25,7 +25,7 @@ const store = createStoreWithMiddleware(rootReducer);
 render(
     <Provider store={store}>
         <Router history={browserHistory}>
-            <Route path="/" component={CheckAuth(App)}>
+            <Route path="/" component={CheckAuth(HandleApp)}>
                 <IndexRoute component={WelcomePage} />
                 <Route path="store" component={RequireAuth(StorePage)} />
                 <Route path="weather" component={RequireAuth(WeatherPage)} />
