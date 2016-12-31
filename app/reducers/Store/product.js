@@ -72,6 +72,9 @@ export default (state = {}, action) => {
         case actions.STOP_LOAD:
         case actions.START_LOAD:
             return Object.assign({}, state, {loaded : action.loaded});
+
+        case actions.CHANGE_PAGE:
+            return Object.assign({}, state, {page : action.page});
     }
     return state;
 };

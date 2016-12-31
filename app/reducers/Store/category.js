@@ -36,6 +36,20 @@ export default (state = {}, action) => {
         case actions.REMOVE_CATEGORY:
         case actions.GET_CATEGORIES:
             return Object.assign({}, state, action.categories, action.openRemindModal);
+
+        case actions.CHECK_CATEGORY_TO_EXIST:
+            let arr = state.cats.filter( f => {
+                return f.name === action.name;
+            });
+
+            let flag = arr && arr.length > 0;
+            return Object.assign({}, state, { openAddCategoryModal : flag, loaded : !flag, categoryExist : flag });
+
+        case actions.STOP_LOAD:
+            return Object.assign({}, state, { loaded : false });
+
+        case actions.SET_CATEGORY_EXIST_FLAG:
+            return Object.assign({}, state, { categoryExist : false });
     }
     return state;
 };

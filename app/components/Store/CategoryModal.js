@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import Button from '../common/Button';
 import ModalWindow from '../common/ModalWindow';
+import Warning from '../common/Warning';
 
 class CategoryModal extends Component{
     constructor(props){
@@ -12,18 +13,21 @@ class CategoryModal extends Component{
         this.handleChangeName = this.handleChangeName.bind(this);
     }
 
-    cancelClick(){
+    componentWillUnmount(){
         this.setState({name : ""});
+    }
+
+    cancelClick(){
         this.props.close()
     }
 
     handleClickBtn(){
         if (!this.state.name.trim()) return;
         this.props.handleClick(this.state.name);
-        this.setState({name : ""});
     }
 
     handleChangeName(e){
+        this.props.setCategoryExistFlag();
         this.setState({name : e.target.value});
     }
 
@@ -37,6 +41,7 @@ class CategoryModal extends Component{
                 <div className="modal-body">
                     <input type="text" name="name" value={this.state.name} onChange={this.handleChangeName} className="form-control" placeholder="Название"/>
                 </div>
+                {this.props.categoryExist && <Warning strongText="Предупреждение!" text="Категория с таким названием уже существует" />}
                 <div className="modal-footer">
                     <Button classSet="btn-primary" handleClick={this.handleClickBtn} text="Сохранить"/>
                     <Button classSet="btn-danger" handleClick={this.cancelClick} text="Отменить"/>
@@ -48,8 +53,10 @@ class CategoryModal extends Component{
 
 CategoryModal.propTypes = {
     headerTitle: PropTypes.string,
+    categoryExist : PropTypes.any,
     close : PropTypes.func,
-    handleClick : PropTypes.func
+    handleClick : PropTypes.func,
+    setCategoryExistFlag : PropTypes.func
 };
 
 export default CategoryModal;

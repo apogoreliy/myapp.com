@@ -31,3 +31,9 @@ export const CLOSE_AUTH_MODAL = 'closeAuthModal';
 
 export const AUTH = 'auth';
 export const SIGN_OUT = 'signOut';
+
+export const TEST_DB = 'testDB';
+
+export const CHECK_CATEGORY_TO_EXIST = 'checkCategoryToExist';
+export const SET_CATEGORY_EXIST_FLAG = 'setCategoryExistFlag';
+export const CHANGE_PAGE = 'changePage';

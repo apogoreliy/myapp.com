@@ -1,10 +1,11 @@
 import { connect } from 'react-redux';
 import CategoryModal from '../../components/Store/CategoryModal';
-import { closeCategoryModal, addCategory } from '../../actions/Store/index'
+import { closeCategoryModal, addCategory, setCategoryExistFlag } from '../../actions/Store/index'
 
-const mapStateToProps = () => {
+const mapStateToProps = (state) => {
     return {
-        headerTitle : "Добавить категорию"
+        headerTitle : "Добавить категорию",
+        categoryExist : state.category.categoryExist
     }
 };
 
@@ -15,6 +16,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         handleClick : (name) => {
             dispatch(addCategory(name))
+        },
+        setCategoryExistFlag : ()=>{
+            dispatch(setCategoryExistFlag())
         }
     }
 };

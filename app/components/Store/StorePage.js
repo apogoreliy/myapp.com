@@ -4,12 +4,14 @@ import HandleHandler from '../../containers/Store/HandleHandler';
 import HandleProductsList from '../../containers/Store/HandleProductsList';
 import HandleCategoriesList from '../../containers/Store/HandleCategoriesList';
 import Spinner from '../common/Spinner';
+import HandlePagination from '../../containers/HandlePagination';
 
 const StorePage = ({loaded}) => (
     <div className="container">
         <HandleHandler />
         <HandleCategoriesList />
         <HandleProductsList />
+        <HandlePagination />
         <Spinner loaded={loaded}/>
     </div>
 );
@@ -20,7 +22,7 @@ StorePage.propTypes = {
 
 const mapStateToProps = (state) => {
     return {
-        loaded : state.product.loaded
+        loaded : state.product.loaded || state.category.loaded
     }
 };
 

@@ -1,6 +1,5 @@
 import * as actions from './types';
-import utils from '../utils/index';
-import { browserHistory} from 'react-router';
+import utils from '../utils/interactionServer';
 
 export const openAuthModalToSignIn = () => {
     return {
@@ -61,7 +60,7 @@ export const checkAuth = () => {
             utils.checkAuth(token, response => {
                 dispatch({
                     type: actions.AUTH,
-                    loggedIn : response
+                    loggedIn : response.data
                 });
             });
         }

@@ -20,33 +20,42 @@ module.exports = {
         return new Promise(function(resolve, reject) {
             that.connection().then(function(db) {
                 const collection = db.collection('products');
-                collection.find().sort({productID: -1}).limit(1).toArray(function(err, i) {
+                collection.find({}, {productID : 1, _id: 0}).sort({productID: -1}).limit(1).next(function(err, i) {
                     if(err){ reject(err) }
                     else{
-                        var productID = !i[0] ? 0 : ++i[0]['productID'];
-                        collection.insert({name : product.name, productID: parseInt(productID), purchasePrice : product.purchasePrice,
+                        var productID = !i ? 0 : ++i['productID'];
+                        collection.insertOne({name : product.name, productID: parseInt(productID), purchasePrice : product.purchasePrice,
                             price: product.price, categoryID: parseInt(product.categoryID)}, function(err) {
                             err ? reject(err) : resolve(parseInt(productID));
                         });
                     }
                 });
-
             });
         });
     },
 
     addCategory : function(category){
-        const that =this;
+        const that = this;
         return new Promise(function(resolve, reject) {
             that.connection().then(function(db) {
                 const collection = db.collection('categories');
-                collection.find().sort({categoryID: -1}).limit(1).toArray(function(err, i) {
+                collection.find({}, {_id: 0}).sort({categoryID: -1}).toArray(function(err, items) {
                     if(err){ reject(err) }
                     else{
-                        var categoryID = !i[0] ? 0 : ++i[0]['categoryID'];
-                        collection.insert({name : category.name, categoryID: parseInt(categoryID)}, function(err) {
-                            err ? reject(err) : resolve(parseInt(categoryID));
+                        var categoryExist = false;
+                        items.forEach((i)=>{
+                            if(i.name === category.name) {
+                                categoryExist = true;
+                                resolve({categoryExist : true});
+                            }
                         });
+
+                        if(!categoryExist) {
+                            var categoryID = !items ? 0 : ++items[0]['categoryID'];
+                            collection.insertOne({ name: category.name, categoryID: parseInt(categoryID)}, function (err) {
+                                err ? reject(err) : resolve(parseInt(categoryID));
+                            });
+                        }
                     }
                 });
             });
@@ -81,42 +90,30 @@ module.exports = {
 
     checkIfCategoryHasProducts : function(id, collectionProds){
         return new Promise(function(resolve, reject) {
-            collectionProds.find({categoryID: id}).forEach(
-                function () {
-                    resolve(true);
-                },
-                function () {
-                    resolve(false);
-                }
-            );
+            collectionProds.find({categoryID: id}, {categoryID : 1, _id : 0}).limit(1).next(function(err, p){
+                if(err) reject(err);
+                resolve(p);
+            });
         });
     },
 
     checkIfWithoutCategoryExist: function(collection){
         return new Promise(function(resolve, reject) {
-            collection.find({name: "Без категории"}).toArray(function (err, category) {
+            collection.find({name: "Без категории"}, {categoryID : 1, _id : 0}).next(function (err, category) {
                 if(err) { reject(err) }
-                else{
-                    if(!category[0]){ resolve(false);}
-                    else{
-                        resolve(category[0]['categoryID']);
-                    }
-                }
+                resolve(!category ? false : category['categoryID']);
             });
         });
     },
 
     createWithoutCategory : function(id, collection){
         return new Promise(function(resolve, reject) {
-            collection.find().sort({categoryID: -1}).limit(1).toArray(function (err, category) {
-                var categoryID = !category[0] ? 0 : ++category[0]['categoryID'];
-                collection.insert({name: "Без категории", categoryID: parseInt(categoryID)},
-                    function (err) {
-                        if (err) { reject(err) }
-                        else {
-                            resolve(categoryID);
-                        }
-                    });
+            collection.find({}, {categoryID : 1, _id : 0}).sort({categoryID: -1}).limit(1).next(function (err, category) {
+                var categoryID = !category ? 0 : ++category['categoryID'];
+                collection.insertOne({name: "Без категории", categoryID: parseInt(categoryID)}, function (err) {
+                    if (err) { reject(err) }
+                    resolve(categoryID);
+                });
             });
         });
     },
@@ -124,24 +121,10 @@ module.exports = {
     updateProductsByCategory : function(collection, currentId, withoutCategoryId){
         return new Promise(function(resolve, reject) {
             if(withoutCategoryId) {
-                const cursor = collection.find({categoryID: currentId});
-
-                cursor.forEach(
-                    function (product) {
-                        collection.updateOne(
-                            {productID: parseInt(product.productID)},
-                            {$set: {categoryID: parseInt(withoutCategoryId)}},
-                            function (err) {
-                                if (err) {
-                                    reject(err)
-                                }
-                                else {
-                                    resolve()
-                                }
-                            }
-                        );
-                    },
-                    function () {
+                collection.updateMany(
+                    {categoryID: parseInt(currentId)}, {$set: {categoryID: parseInt(withoutCategoryId)}},
+                    function (err) {
+                        if (err) reject(err);
                         resolve();
                     }
                 );
@@ -168,7 +151,7 @@ module.exports = {
 
     removeWithoutCategory: function(collection, id){
         return new Promise(function(resolve, reject) {
-            collection.remove({categoryID: id}, function (err) {
+            collection.deleteOne({categoryID: id}, function (err) {
                 err ? reject(err) : resolve();
             });
         });
@@ -177,11 +160,8 @@ module.exports = {
     removeCategory : function(id, collection){
         return new Promise(function(resolve, reject) {
             collection.deleteOne({categoryID: id}, function (err) {
-                if(err){
-                    reject(err)
-                } else{
-                    resolve();
-                }
+                if(err) reject(err);
+                resolve();
             });
         });
     },
@@ -272,14 +252,9 @@ module.exports = {
 
     checkIfUserExists: function(collection, login){
         return new Promise(function(resolve, reject) {
-            collection.find({login}).toArray(function (err, user) {
+            collection.find({login}, {token : 1, _id : 0}).limit(1).next(function(err, user){
                 if(err) { reject(err) }
-                else{
-                    if(!user[0]){ resolve(false);}
-                    else{
-                        resolve(user[0].token);
-                    }
-                }
+                resolve(user);
             });
         });
     },
@@ -287,9 +262,7 @@ module.exports = {
     auth : function (type, login, password) {
         const that =this;
         return new Promise(function(resolve, reject) {
-            if (!login || !password) {
-                resolve({errorData : true});
-            }
+            if (!login || !password) resolve({errorData : true});
 
             that.connection().then(function(db) {
                 const collection = db.collection('user');
@@ -300,12 +273,12 @@ module.exports = {
                         resolve({userExist : true});
                     }
                     else if(!user && type === 'signUp'){
-                        collection.insert({login, token}, function (err) {
-                            err ? reject(err) : resolve({token : token});
+                        collection.insertOne({login, token}, function (err) {
+                            err ? reject(err) : resolve({token});
                         });
                     }
                     else if(user && type === 'signIn'){
-                        resolve(token !== user ? {errorToken: true} : {token});
+                        resolve(token !== user.token ? {errorToken: true} : {token});
                     }
                     else if(!user && type === 'signIn'){
                         resolve({userUnexist : true});
@@ -318,21 +291,12 @@ module.exports = {
     checkAuth : function(token){
         const that =this;
         return new Promise(function(resolve, reject) {
-            if (!token) {
-                resolve({errorToken : true});
-            }
+            if (!token) resolve({errorToken : true});
 
             that.connection().then(function(db) {
-                const collection = db.collection('user');
-                collection.find({token}).toArray(function (err, user) {
+                db.collection('user').find({token}, {login : 1, _id : 0}).limit(1).next(function(err, user){
                     if(err) { reject(err) }
-                    else{
-                        if(!user[0]){
-                            resolve({errorToken : true});}
-                        else{
-                            resolve({loggedIn : true});
-                        }
-                    }
+                    resolve(!user ? {errorToken : true} : {loggedIn : true});
                 });
             });
         });

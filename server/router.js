@@ -2,8 +2,9 @@ const DB = require('./db');
 
 module.exports = (app) =>{
     app.post('/add_category', (req, res)=> {
-        DB.addCategory(req.body).then(function(id) {
-            res.json({categoryID:id});
+        DB.addCategory(req.body).then(function(category) {
+            if(category.categoryExist) res.json(category);
+            res.json({categoryID:category});
         }, function(err) {
             console.error('The promise was rejected', err, err.stack);
         });

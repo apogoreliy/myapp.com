@@ -1,5 +1,5 @@
 import * as actions from '../types';
-import utils from '../../utils/index';
+import utils from '../../utils/interactionServer';
 
 //general actions
 export const closeDeleteModal = () => {
@@ -142,18 +142,32 @@ export const removeCategory = (id) => {
     }
 };
 
+export const checkCategoryToExist = (name) => {
+    return {
+        type: actions.CHECK_CATEGORY_TO_EXIST,
+        name
+    }
+};
+
+export const setCategoryExistFlag = () => {
+    return {
+        type: actions.SET_CATEGORY_EXIST_FLAG
+    }
+};
+
 export const addCategory = (name) => {
     return dispatch => {
-        dispatch(closeCategoryModal());
-        dispatch(startLoading());
+        dispatch(checkCategoryToExist(name));
 
         utils.addCategory(name, response => {
-            dispatch(stopLoading());
-            dispatch({
-                type: actions.ADD_CATEGORY,
-                name,
-                categoryID : response.data.categoryID
-            });
+            if(!response.data.categoryExist) {
+                dispatch(stopLoading());
+                dispatch({
+                    type: actions.ADD_CATEGORY,
+                    name,
+                    categoryID: response.data.categoryID
+                });
+            }
         });
     }
 };
@@ -210,5 +224,12 @@ export const closeRemindModal = () => {
     return {
         type: actions.CLOSE_REMIND_MODAL,
         openRemindModal : false
+    }
+};
+
+export const changePage = (page) => {
+    return {
+        type: actions.CHANGE_PAGE,
+        page
     }
 };

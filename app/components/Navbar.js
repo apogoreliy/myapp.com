@@ -3,7 +3,6 @@ import HandleAuthPanel from '../containers/HandleAuthPanel';
 import {Link} from 'react-router';
 
 const Navbar = () => (
-    <div>
         <nav className="navbar navbar-default">
             <div className="container">
                 <div className="navbar-header">
@@ -21,7 +20,7 @@ const Navbar = () => (
                         <li>
                             <Link to="/store" activeClassName="active">Store</Link>
                         </li>
-                        <li>
+                        {/*<li>
                             <Link to="/weather" activeClassName="active">Weather</Link>
                         </li>
                         <li>
@@ -29,13 +28,12 @@ const Navbar = () => (
                         </li>
                         <li>
                             <Link to="/github" activeClassName="active">Github</Link>
-                        </li>
+                        </li> */}
                     </ul>
                     <HandleAuthPanel />
                 </div>
             </div>
         </nav>
-    </div>
 );
 
 export default Navbar;

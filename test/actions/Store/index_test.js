@@ -10,7 +10,7 @@ import nock from 'nock';
 const middlewares = [ thunk ];
 const mockStore = configureMockStore(middlewares);
 
-import utils from '../../../app/utils/index';
+import utils from '../../../app/utils/interactionServer';
 
 describe('Actions', () => {
     afterEach(() => {
