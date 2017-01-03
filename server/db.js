@@ -4,6 +4,7 @@ const URL = 'mongodb://apogoreliy:7spirits@ds131878.mlab.com:31878/myapp';
 const Promise = require('rsvp').Promise;
 const jwt = require('jwt-simple');
 const config = require('./config');
+const services = require('../app/utils/services');
 
 module.exports = {
     connection : function() {
@@ -226,12 +227,15 @@ module.exports = {
         });
     },
 
-    getProducts: function(){
-        const that =this;
+    getProducts: function(value){
+        const that = this;
+        value = services.he(value);
+
         return new Promise(function(resolve, reject) {
             that.connection().then(function(db) {
                 const collection = db.collection('products');
-                collection.find({},{_id: 0}).toArray(function(err, items) {
+                var search = value ? {name: { $regex : `${value}`, $options: 'i'}} : {};
+                collection.find(search,{_id: 0}).toArray(function(err, items) {
                     err ? reject(err) : resolve(items);
                 });
             });
@@ -304,5 +308,16 @@ module.exports = {
 
     tokenForUser: function(login, password) {
         return jwt.encode({ password, login }, config.secret);
+    },
+
+    searchProducts : function (searchField) {
+        const that =this;
+        searchField = services.he(searchField);
+
+        return new Promise(function(resolve, reject) {
+            that.getProducts(searchField).then(function (products) {
+                resolve(products);
+            });
+        });
     }
 };

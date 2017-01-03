@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react';
 import { connect } from 'react-redux';
-import HandleHandler from '../../containers/Store/HandleHandler';
+import HandleHeader from '../../containers/Store/HandleHeader';
 import HandleProductsList from '../../containers/Store/HandleProductsList';
 import HandleCategoriesList from '../../containers/Store/HandleCategoriesList';
 import Spinner from '../common/Spinner';
@@ -8,7 +8,7 @@ import HandlePagination from '../../containers/HandlePagination';
 
 const StorePage = ({loaded}) => (
     <div className="container">
-        <HandleHandler />
+        <HandleHeader />
         <HandleCategoriesList />
         <HandleProductsList />
         <HandlePagination />

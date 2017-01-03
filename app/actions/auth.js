@@ -1,5 +1,5 @@
-import * as actions from './types';
-import utils from '../utils/interactionServer';
+import * as actions from '../constants';
+import utils from '../utils/fetch';
 
 export const openAuthModalToSignIn = () => {
     return {

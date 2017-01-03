@@ -1,5 +1,5 @@
 import * as ActionCreators from '../../../app/actions/Store/index';
-import * as ActionTypes from '../../../app/actions/types';
+import * as ActionTypes from '../../../app/constants';
 
 //import sinon from 'sinon';
 import { expect } from 'chai';
@@ -10,7 +10,7 @@ import nock from 'nock';
 const middlewares = [ thunk ];
 const mockStore = configureMockStore(middlewares);
 
-import utils from '../../../app/utils/interactionServer';
+import utils from '../../../app/utils/fetch';
 
 describe('Actions', () => {
     afterEach(() => {

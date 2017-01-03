@@ -1,6 +1,6 @@
-import { connect } from 'react-redux'
-import { openProductModal, openCategoryModal, openRemindModalFunc } from '../../actions/Store/index'
-import Handler from '../../components/Store/Handler'
+import { connect } from 'react-redux';
+import { openProductModal, openCategoryModal, openRemindModalFunc, searchProducts } from '../../actions/Store/index';
+import Header from '../../components/Store/Header';
 
 const mapStateToProps = (state) => {
     return{
@@ -18,11 +18,11 @@ const mapDispatchToProps = (dispatch) => {
         },
         openRemindModalFunc: ()=> {
             dispatch(openRemindModalFunc())
+        },
+        searchProducts : (value) => {
+            dispatch(searchProducts(value))
         }
     }
 };
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(Handler);
+export default connect( mapStateToProps, mapDispatchToProps )(Header);

@@ -2,7 +2,7 @@ import Pagination from '../components/common/Pagination';
 import { connect } from 'react-redux';
 import {changePage} from '../actions/Store/index';
 import services from '../utils/services';
-import * as constants from '../utils/constants';
+import * as constants from '../constants';
 
 const mapStateToProps = (state) => {
     let totalPages = 0, countProds = 0;

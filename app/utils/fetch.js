@@ -2,18 +2,18 @@ import axios from 'axios';
 
 const ROOT_URL = location.host === 'localhost:3000' ? 'http://localhost:3000' : 'https://warm-garden-46587.herokuapp.com';
 
-module.exports = {
-    editProduct : function(productID, categoryID, name, purchasePrice, price){
+export default {
+    editProduct (productID, categoryID, name, purchasePrice, price){
         axios.post(`${ROOT_URL}/edit_product`, {productID, categoryID, name, purchasePrice, price})
             .catch(err => { console.log('err', err) });
     },
 
-    removeProduct : function(id){
+    removeProduct (id){
         axios.post(`${ROOT_URL}/remove_product`, {id})
             .catch(err => { console.log('err', err) });
     },
 
-    fetchProducts : function (callback) {
+    fetchProducts (callback) {
         axios.get(`${ROOT_URL}/get_products`)
             .then(response => {
                 callback(response);
@@ -23,7 +23,7 @@ module.exports = {
             });
     },
 
-    removeCategory : function(id, callback){
+    removeCategory(id, callback){
         axios.post(`${ROOT_URL}/remove_category`, {id})
             .then((response) => {
                 callback(response);
@@ -33,7 +33,7 @@ module.exports = {
             });
     },
 
-    addCategory : function(name, callback){
+    addCategory (name, callback){
         axios.post(`${ROOT_URL}/add_category`, {name})
             .then(response => {
                 callback(response);
@@ -43,7 +43,7 @@ module.exports = {
             });
     },
 
-    fetchCategories : function(callback){
+    fetchCategories (callback){
         axios.get(`${ROOT_URL}/get_categories`)
             .then(response => {
                 callback(response);
@@ -53,7 +53,7 @@ module.exports = {
             });
     },
 
-    addProduct : function(categoryID, name, purchasePrice, price, callback){
+    addProduct (categoryID, name, purchasePrice, price, callback){
         axios.post(`${ROOT_URL}/add_product`, {categoryID, name, purchasePrice, price})
             .then((response) => {
                 callback(response);
@@ -63,7 +63,7 @@ module.exports = {
             });
     },
 
-    auth : function(type, login, password, callback){
+    auth (type, login, password, callback){
         axios.post(`${ROOT_URL}/auth`, {type, login, password})
             .then((response) => {
                 callback(response);
@@ -73,12 +73,22 @@ module.exports = {
             });
     },
 
-    checkAuth : function(token, callback){
+    checkAuth (token, callback){
         axios.post(`${ROOT_URL}/check_auth`, {token})
             .then((response) => {
                 callback(response);
             })
             .catch(err => {
+                console.log('err', err)
+            });
+    },
+
+    searchProducts(searchField, callback){
+        axios.post(`${ROOT_URL}/search_products`, {searchField})
+            .then((response) => {
+                callback(response);
+            })
+            .catch(err =>{
                 console.log('err', err)
             });
     }

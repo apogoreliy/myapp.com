@@ -1,5 +1,5 @@
 import React , {PropTypes, Component} from 'react';
-import * as constants from '../../utils/constants';
+import * as constants from '../../constants';
 
 class Pagination extends Component {
     constructor(props){

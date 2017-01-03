@@ -93,4 +93,14 @@ module.exports = (app) =>{
                 console.error('The promise was rejected', err, err.stack);
             });
     });
+
+    app.post('/search_products', (req, res) => {
+        DB.searchProducts(req.body.searchField)
+            .then(response => {
+                res.json(response);
+            })
+            .catch(err => {
+                console.error('The promise was rejected', err, err.stack);
+            });
+    });
 };

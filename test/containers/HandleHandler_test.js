@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 import { shallow } from 'enzyme';
 import { expect } from 'chai';
 
-import HandleHandler from '../../app/containers/Store/HandleHandler';
+import HandleHandler from '../../app/containers/Store/HandleHeader';
 import {storeFake} from '../storeFake'
 
 describe('HandleHandler' , () => {

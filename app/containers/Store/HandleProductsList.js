@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import { openEditProductModal, openDeleteProductModal, fetchProducts, closeRemindModal } from '../../actions/Store/index'
 import ProductList from '../../components/Store/ProductsList';
 import services from '../../utils/services';
-import * as constants from '../../utils/constants';
+import * as constants from '../../constants';
 
 const mapStateToProps = (state) => {
     let products = null, page = (state.product.page ? parseInt(state.product.page) : 1),

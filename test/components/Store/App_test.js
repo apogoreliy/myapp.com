@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 import { expect } from 'chai';
 
 import App from '../../../app/components/Store/App';
-import HandleHeader from '../../../app/containers/Store/HandleHandler';
+import HandleHeader from '../../../app/containers/Store/HandleHeader';
 import Body from '../../../app/components/Store/Body';
 
 describe('App' , () => {

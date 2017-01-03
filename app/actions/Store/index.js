@@ -1,5 +1,5 @@
-import * as actions from '../types';
-import utils from '../../utils/interactionServer';
+import * as actions from '../../constants';
+import utils from '../../utils/fetch';
 
 //general actions
 export const closeDeleteModal = () => {
@@ -231,5 +231,16 @@ export const changePage = (page) => {
     return {
         type: actions.CHANGE_PAGE,
         page
+    }
+};
+
+export const searchProducts = (searchField) => {
+    return function(dispatch) {
+        utils.searchProducts(searchField, function(response){
+            dispatch({
+                type: actions.GET_PRODUCTS,
+                products: {prods : response.data}
+            });
+        });
     }
 };
