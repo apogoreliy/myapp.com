@@ -235,12 +235,8 @@ export const changePage = (page) => {
 };
 
 export const searchProducts = (searchField) => {
-    return function(dispatch) {
-        utils.searchProducts(searchField, function(response){
-            dispatch({
-                type: actions.GET_PRODUCTS,
-                products: {prods : response.data}
-            });
-        });
-    }
+    return{
+        type: actions.FILTER_PRODUCTS,
+        searchField
+    };
 };

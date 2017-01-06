@@ -9,7 +9,7 @@ const mapStateToProps = (state) => {
         num = constants.COUNT_ITEMS_ON_PAGE, start = page * num - num;
 
     if(state.product.prods){
-        let tempArr = services.filterProducts(state.product.prods, state.category.selectedCategory);
+        let tempArr = services.filterProducts(state.product.prods, state.category.selectedCategory, state.product.searchField);
         products = tempArr.slice(start, num*page);
     }
 

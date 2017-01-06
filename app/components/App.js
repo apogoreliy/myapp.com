@@ -11,7 +11,7 @@ const App = ({children, showAuthModal}) => (
 );
 
 App.propTypes = {
-    children : PropTypes.any.isRequired,
+    children : PropTypes.any,
     showAuthModal : PropTypes.bool
 };
 

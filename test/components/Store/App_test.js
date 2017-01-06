@@ -2,9 +2,9 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { expect } from 'chai';
 
-import App from '../../../app/components/Store/App';
-import HandleHeader from '../../../app/containers/Store/HandleHeader';
-import Body from '../../../app/components/Store/Body';
+import App from '../../../app/components/App';
+import HandleAuthModal from '../../../app/containers/HandleAuthModal';
+import Navbar from '../../../app/components/Navbar';
 
 describe('App' , () => {
     let component;
@@ -17,19 +17,12 @@ describe('App' , () => {
         expect(component).to.exist;
     });
 
-    it('has class "container"', () => {
-        expect(component.hasClass('container')).to.equal(true);
+    it('has HandleAuthModal element"', () => {
+        expect(component.find(HandleAuthModal)).to.exist;
     });
 
-    it('has HandleHeader element"', () => {
-        expect(component.find(HandleHeader)).to.exist;
+    it('has Navbar element"', () => {
+        expect(component.find(Navbar)).to.exist;
     });
 
-    it('has Body element"', () => {
-        expect(component.find(Body)).to.exist;
-    });
-
-    it('has 2 children"', () => {
-        expect(component.children()).to.have.length(2);
-    });
 });

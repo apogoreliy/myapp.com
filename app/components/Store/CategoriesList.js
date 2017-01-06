@@ -7,7 +7,7 @@ class CategoriesList extends Component{
         super(props)
     }
 
-    componentWillMount(){
+    componentDidMount(){
         this.props.fetchCategories();
     }
 

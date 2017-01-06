@@ -5,7 +5,7 @@
   "main": "index.js",
   "repository": "git@github.com:apogoreliy/myapp.com.git",
   "scripts": {
-    "start": "node ./server/server.js",
+    "start": "node_modules/.bin/babel-node ./server/server.js",
     "test": "mocha --compilers js:babel-core/register --recursive ./test",
     "test:watch": "npm run test -- --watch"
   },
@@ -30,7 +30,8 @@
     "sinon": "^1.17.6",
     "style-loader": "^0.13.1",
     "webpack": "^1.12.9",
-    "webpack-dev-server": "^1.14.0"
+    "webpack-dev-server": "^1.14.0",
+    "react-addons-perf": "^15.4.1"
   },
   "dependencies": {
     "axios": "^0.9.1",
@@ -39,17 +40,17 @@
     "exenv": "^1.2.1",
     "express": "^4.13.4",
     "http": "0.0.0",
+    "jsdom": "^8.1.0",
+    "jwt-simple": "^0.5.1",
     "lodash": "^3.10.1",
     "mongodb": "^2.2.15",
-    "react": "^0.14.3",
-    "react-dom": "^0.14.3",
+    "react": "^15.4.1",
+    "react-dom": "^15.4.1",
     "react-redux": "^4.0.0",
     "react-router": "^2.0.1",
     "redux": "^3.0.4",
     "redux-thunk": "^2.1.0",
     "rsvp": "^3.3.3",
-    "validator": "^6.2.0",
-    "jwt-simple": "^0.5.1",
-    "jsdom": "^8.1.0"
+    "validator": "^6.2.0"
   }
 }

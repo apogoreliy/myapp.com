@@ -2,6 +2,9 @@ import axios from 'axios';
 
 const ROOT_URL = location.host === 'localhost:3000' ? 'http://localhost:3000' : 'https://warm-garden-46587.herokuapp.com';
 
+//For testing
+//const ROOT_URL = 'http://localhost:3000';
+
 export default {
     editProduct (productID, categoryID, name, purchasePrice, price){
         axios.post(`${ROOT_URL}/edit_product`, {productID, categoryID, name, purchasePrice, price})

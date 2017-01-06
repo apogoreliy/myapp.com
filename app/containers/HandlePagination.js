@@ -8,7 +8,7 @@ const mapStateToProps = (state) => {
     let totalPages = 0, countProds = 0;
 
     if(state.product.prods) {
-        countProds = services.filterProducts(state.product.prods, state.category.selectedCategory);
+        countProds = services.filterProducts(state.product.prods, state.category.selectedCategory, state.product.searchField);
 
         if (countProds.length > 0) {
             totalPages = ((countProds.length - 1) / constants.COUNT_ITEMS_ON_PAGE) + 1;

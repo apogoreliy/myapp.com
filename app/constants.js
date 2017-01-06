@@ -7,6 +7,7 @@ export const ADD_PRODUCT = 'addProduct';
 export const EDIT_PRODUCT = 'editProduct';
 export const REMOVE_PRODUCT = 'removeProduct';
 export const GET_PRODUCTS = 'getProducts';
+export const FILTER_PRODUCTS = 'filterProducts';
 
 // categories
 export const OPEN_ADD_CATEGORY_MODAL = 'openAddCategoryModal';

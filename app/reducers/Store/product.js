@@ -75,6 +75,9 @@ export default (state = {}, action) => {
 
         case actions.CHANGE_PAGE:
             return Object.assign({}, state, {page : action.page});
+
+        case actions.FILTER_PRODUCTS:
+            return Object.assign({}, state, {searchField : action.searchField});
     }
     return state;
 };
