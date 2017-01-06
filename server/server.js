@@ -1,8 +1,8 @@
-import express from 'express';
-import http from 'http';
-import path from 'path';
-import bodyParser from 'body-parser';
-import router from './router';
+const express = require( 'express');
+const http = require('http');
+const path = require('path');
+const bodyParser = require( 'body-parser');
+const router = require('./router');
 
 const app = express();
 
@@ -18,7 +18,6 @@ router(app);
 
 // Server Setup
 const port = process.env.PORT || 3000;
-//const server = http.createServer(app);
-//server.listen(port);
-app.listen(port);
+const server = http.createServer(app);
+server.listen(port);
 console.log('Server listening on:', port);
