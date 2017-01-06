@@ -1,4 +1,4 @@
-export default {
+module.exports = {
     filterProducts (products, selectedCategory, searchField) {
         let arr = products.filter ( p => {
             return parseInt(p.categoryID) === ( selectedCategory ||
