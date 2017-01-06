@@ -1,9 +1,9 @@
 // Connecting MongoDB
 const MongoClient = require('mongodb').MongoClient;
-const URL = 'mongodb://apogoreliy:7spirits@ds131878.mlab.com:31878/myapp';
+const config = require('./config');
+const URL = config.URL;
 const Promise = require('rsvp').Promise;
 const jwt = require('jwt-simple');
-const config = require('./config');
 const services = require('../app/utils/services');
 
 module.exports = {
